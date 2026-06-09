@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homicidios intencionales en el Ecuador entre 2014 y 2026</title>
+    <script src="homicidios.js" defer></script>
+    <link rel="stylesheet" href="homicidios.css">
+</head>
+<body>
+
+    <input type="checkbox" id="menu-toggle" class="menu-checkbox">
+
+    <label for="menu-toggle" class="menu-btn-container" aria-label="Abrir menú de lecciones">
+        <div class="hamburger-lines">
+            <span class="line line1"></span>
+            <span class="line line2"></span>
+            <span class="line line3"></span>
+        </div>
+    </label>
+
+    <label for="menu-toggle" class="menu-overlay"></label>
+
+    <aside class="sidebar-navigation">
+        <div class="sidebar-header">
+            <h3>
+                Homicidios intencionales <br>
+                Ecuador 2014-2026
+            </h3>
+        </div>
+                
+        <nav class="sidebar-menu">
+            <label for="menu-toggle" onclick="mostrarSeccion('inicio')">Inicio</label>
+            <label for="menu-toggle" onclick="mostrarSeccion('area')">1. Área geográfica de los delitos</label>
+            <label for="menu-toggle" onclick="mostrarSeccion('sexo')">2. Sexo de las víctimas</label>
+            <label for="menu-toggle" onclick="mostrarSeccion('edad')">3. Edad de las víctimas</label>
+            <label for="menu-toggle" onclick="mostrarSeccion('comparacionEntreAnios')">4. Comparación entre años</label>
+        </nav>
+    </aside>
+
+    <header class="main-desktop-header" style="text-align: center; margin-top: 40px;">
+       <h1>Homicidios intencionales en el Ecuador</h1>
+       <h2>Estadísticas ene 2014 - abr 2026</h2>       
+    </header>
+
+    <section id="inicio" class="activa">
+        <div style="text-align: center; padding: 20px 20px; max-width: 800px; margin: 0 auto;">
+            <p style="font-size: 1.2rem; color: #6b7f90; max-width: 600px; margin: 0 auto 30px auto; line-height: 1.6;">
+                Esta aplicación web presenta datos estadísticos sobre homicidios intencionales en Ecuador entre enero de 2014 y abril de 2026. La información se basa en datos primarios obtenidos de las páginas oficiales del Ministerio del Interior y del INEC, consultadas el 7 de junio de 2026, las mismas que son de libre acceso para toda la ciudadanía. <br> <br>
+                Las secciones presentan datos de homicidios por año y provincia, junto con variables como área, edad y sexo de las víctimas, además de una comparación entre distintos años. <br> <br>
+                La herramienta permite explorar las cifras registradas y obtener métricas estadísticas como porcentajes, media, mediana, moda y tendencia.
+            </p>
+            
+            <button onclick="mostrarSeccion('area')" style="padding: 14px 28px; font-size: 1.1rem; cursor: pointer; background-color: #0f2d52; color: white; border: none; border-radius: 8px; font-weight: 600; transition: background 0.2s;">
+                Comenzar análisis →
+            </button>
+        </div>
+    </section>
+
+    <section id="area" class="contenedor-tema" style="margin-top: 40px;">
+        <h2>Área geográfica de los delitos</h2>
+        <p>Los homicidios se han ejecutado tanto en areas urbanas como rurales. </p>
+
+    </section>
+
+    <section id="sexo" class="contenedor-tema" style="margin-top: 40px;">
+        <h2>Sexo de las víctimas</h2>
+        <p></p>
+
+    </section>
+
+    <section id="edad" class="contenedor-tema" style="margin-top: 40px;">
+        <h2>Edad de las víctimas</h2>
+        <p></p>
+
+    </section>
+
+    <section id="comparacionEntreAnios" class="contenedor-tema" style="margin-top: 40px;">
+        <h2>Comparación entre años</h2>
+        <p></p>
+
+    </section>
+
+     <footer>
+        Creado por Francisco Rodríguez y Diego Chicaiza
+    </footer>
+
+</body>
+</html>
