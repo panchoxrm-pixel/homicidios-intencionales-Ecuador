@@ -40,7 +40,7 @@
 
     <header class="main-desktop-header" style="text-align: center; margin-top: 40px;">
        <h1>Homicidios intencionales en el Ecuador</h1>
-       <h2>Estadísticas ene 2014 - abr 2026</h2>       
+       <h2>Estadísticas desde enero 2014 hasta abril 2026</h2>       
     </header>
 
     <section id="inicio" class="activa">
@@ -48,7 +48,7 @@
             <p style="font-size: 1.2rem; color: #6b7f90; max-width: 600px; margin: 0 auto 30px auto; line-height: 1.6;">
                 Esta aplicación web presenta datos estadísticos sobre homicidios intencionales en Ecuador entre enero de 2014 y abril de 2026. La información se basa en datos primarios obtenidos de las páginas oficiales del Ministerio del Interior y del INEC, consultadas el 7 de junio de 2026, las mismas que son de libre acceso para toda la ciudadanía. <br> <br>
                 Las secciones presentan datos de homicidios por año y provincia, junto con variables como área, edad y sexo de las víctimas, además de una comparación entre distintos años. <br> <br>
-                La herramienta permite explorar las cifras registradas y obtener métricas estadísticas como porcentajes, media, mediana, moda y tendencia.
+                La herramienta permite explorar las cifras registradas y obtener métricas estadísticas como porcentaje, media, mediana, moda y tendencia.
             </p>
             
             <button onclick="mostrarSeccion('area')" style="padding: 14px 28px; font-size: 1.1rem; cursor: pointer; background-color: #0f2d52; color: white; border: none; border-radius: 8px; font-weight: 600; transition: background 0.2s;">
@@ -58,26 +58,95 @@
     </section>
 
     <section id="area" class="contenedor-tema" style="margin-top: 40px;">
+        
         <h2>Área geográfica de los delitos</h2>
-        <p>Los homicidios se han ejecutado tanto en areas urbanas como rurales. </p>
+        <p>En esta sección se indican los datos de un año específico de los homicidios intencionales, según el área donde fueron ejecutados, que puede ser urbana o rural.</p>
+        
+            <h3>Datos por año</h3>
+            <p>Escriba el año que desea consultar</p>
+            <input type="text" id="anioArea">
+            <button>Mostrar información</button>
+            
+                <h4>Distribución porcentual por área geográfica en el año...</h4> <!-- Pastel que incluye cantidades, porcentajes y el total de homicidios-->
+                
+                <h4>Promedio mensual del año...</h4>
+                <!-- Tabla con encabezados arriba: Hombres y Mujeres; y encabezado a la izquierda: promedio mensual de homicidios intencionales; en las celdas de los datos van los valores tomados del Excel-->
+                <p>Cada promedio es el resultado de la suma de los valores de todos los meses del año (por sexo) dividida para la cantidad de meses del año.</p>
 
+                <h4>Mediana mensual del año...</h4>
+                <!-- Tabla con encabezados arriba: Área urbana y Área rural; y encabezado a la izquierda: mediana mensual de homicidios intencionales; en las celdas de los datos van los valores tomados del Excel-->
+                <p>Cada mediana se calcula obteniendo el valor intermedio de la lista de la cantidad de homicidios de los 12 meses ordenada de menor a mayor (por área). Al ser una lista par, se promedia entre los puestos intermedios de la lista (6 y 7)</p>                <p></p>
+
+                <h4>Tendencia del año...</h4>
+                <!-- Gráfico de 2 líneas, urbana y rural -->
+                <!-- En el gráfico se muestra la evolución de la cantidad de homicidios intencionales durante cada mes del año, dividida por área urbana y rural.-->
     </section>
 
     <section id="sexo" class="contenedor-tema" style="margin-top: 40px;">
         <h2>Sexo de las víctimas</h2>
-        <p></p>
+        <p>En esta sección se muestran los datos de un año específico de los homicidios intencionales, de acuerdo con el sexo de las víctimas.</p>
+
+            <h3>Datos por año</h3>
+            <p>Escriba el año que desea consultar</p>
+            <input type="text" id="anioArea">
+            <button>Mostrar información</button>
+            
+                <h4>Distribución porcentual por sexo en el año...</h4> <!-- Pastel que incluye cantidades por sexo, porcentajes y el total de homicidios-->
+                
+                <h4>Promedio mensual del año...</h4>
+                <!-- Tabla con encabezados arriba: Área urbana y Área rural; y encabezado a la izquierda: promedio mensual de homicidios intencionales; en las celdas de los datos van los valores tomados del Excel-->
+                <p>Cada promedio es el resultado de la suma de los valores de todos los meses del año (por área) dividida para la cantidad de meses del año.</p>
+
+                <h4>Mediana mensual del año...</h4>
+                <!-- Tabla con encabezados arriba: Área urbana y Área rural; y encabezado a la izquierda: mediana mensual de homicidios intencionales; en las celdas de los datos van los valores tomados del Excel-->
+                <p>Cada mediana se calcula obteniendo el valor intermedio de la lista de la cantidad de homicidios de los 12 meses ordenada de menor a mayor (por sexo). Al ser una lista par, se promedia entre los puestos intermedios de la lista (6 y 7)</p>                <p></p>
+
+                <h4>Tendencia del año...</h4>
+                <!-- Gráfico de 2 líneas, Hombres y Mujeres-->
+                <!-- En el gráfico se muestra la evolución de la cantidad de homicidios intencionales durante cada mes del año, dividida por sexo.-->
 
     </section>
 
     <section id="edad" class="contenedor-tema" style="margin-top: 40px;">
         <h2>Edad de las víctimas</h2>
-        <p></p>
+            <p>En esta sección se presentan los datos de un año específico de los homicidios intencionales, acorde a las edades y sus rangos.</p>
+
+<h3>Datos por año</h3>
+            <p>Escriba el año que desea consultar</p>
+            <input type="text" id="anioArea">
+            <button>Mostrar información</button>
+            
+                <h4>Distribución porcentual por rangos de edad en el año...</h4> <!-- Pastel que incluye cantidades por rango de edad, porcentajes y el total de homicidios-->
+                
+                <h4>Edad promedio de las víctimas del año...</h4>
+                <!-- Tabla con encabezado arriba: Edad promedio; y en la celda de dato va el valor tomado del Excel-->
+                <p>Cada promedio es el resultado de la suma de las edades de las víctimas del año, dividida para la cantidad de homicidios del año</p>
+
+                <h4>Edad mediana de las víctimas del año...</h4>
+                <!-- Tabla con encabezado arriba: Edad mediana; y en la celda del dato va el valor tomado del Excel-->
+                <p>Cada mediana se obtiene ordenando todas las edades de menor a mayor e identificando el valor intermedio de la lista.</p>                <p></p>
+
+                <h4>Moda y frecuencia de la edad de las víctimas del año...</h4>
+                <!-- Tabla con encabezados arriba: Moda y Frecuencia; y en las celdas de datos van los valores tomados del Excel-->
+                <p>La moda es la edad que más se repite en lista de víctimas todo el año, y la frecuencia, la cantidad de veces que se repite. Puede ser una edad o varias si corresponden a la cantidad más alta</p>  
 
     </section>
 
     <section id="comparacionEntreAnios" class="contenedor-tema" style="margin-top: 40px;">
         <h2>Comparación entre años</h2>
-        <p></p>
+
+        <h3>Cantidad de homicidios intencionales desde enero 2014 hasta abril 2026</h3>
+        <!-- Tabla con encabezado arriba: Año y Homicidios intencionales; y en las celdas de datos van los valores tomados del Excel-->
+
+        <h3>Tasa de homicidios por cada 100.000 habitantes 2014-2026</h3>
+        <!-- Gráfico de 2 líneas: Año y Tasa de homicidios por cada 100.000 habitantes, con los valores tomados del Excel-->
+         <p>La tasa se calcula dividiendo el total de homicidios intencionales de un año para el resultado de la división de la población total de ese año (según las proyecciones del INEC) para 100.000. Solamente para el año 2026 se realiza una proyección, por lo que la fórmula se ajusta al tomar en cuenta únicamente 4 meses.</p>
+        
+        <h3>Promedio de homicidios intencionales por mes</h3>
+        <!-- Tabla con los valores tomados del Excel-->
+
+        <h3>Promedio de homicidios internacionales por día</h3>
+        <!-- Tabla con los valores tomados del Excel-->
 
     </section>
 
