@@ -1,34 +1,43 @@
 /* ============================================================
-   SISTEMA DE NAVEGACIÓN — MENÚ LATERAL INTERACTIVO (SIN JS)
+   SISTEMA DE NAVEGACIÓN Y COMPONENTES VISUALES DASHBOARD
    ============================================================ */
 
-/* ── Variables de diseño ────────────────────────────────────── */
 :root {
   --navy:         #0f2d52;
-  --navy-mid:    #1a4070;
-  --navy-light:  #2b5f9e;
+  --navy-mid:    #1e293b;
+  --navy-light:  #3b82f6;
   --accent:      #c8873a;
   --accent-lt:   #e9a95c;
   --white:       #ffffff;
-  --shadow-md:   0 8px 32px rgba(15,45,82,.13);
-  --radius-sm:   8px;
+  --shadow-md:   0 12px 40px rgba(0, 0, 0, 0.5);
+  --radius-sm:   10px;
   --sidebar-w:   300px;
   --transition:  .35s cubic-bezier(.4,0,.2,1);
+  --bg-dark:     #0f172a;
+  --card-bg:     #1e293b;
+  --text-muted:  #94a3b8;
 }
 
-/* ── Reset base obligatorio para la barra lateral ────────────── */
+/* Reset base obligatorio */
 *, *::before, *::after { 
   box-sizing: border-box; 
   margin: 0; 
   padding: 0; 
 }
 
-/* ── Checkbox oculto (Mecanismo del menú) ───────────────────── */
+body {
+    background-color: var(--bg-dark);
+    color: #f8fafc;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding-bottom: 60px;
+}
+
+/* Checkbox oculto del menú */
 .menu-checkbox { 
   display: none; 
 }
 
-/* ── Botón Hamburguesa (Fijo en la esquina superior izquierda) ── */
+/* Botón Hamburguesa Fijo */
 .menu-btn-container {
   position: fixed;
   top: 20px;
@@ -49,11 +58,10 @@
 }
 
 .menu-btn-container:hover {
-  background: var(--navy-mid);
+  background: #1d4ed8;
   transform: scale(1.05);
 }
 
-/* Construcción de las 3 líneas de la hamburguesa */
 .hamburger-lines { 
   display: flex; 
   flex-direction: column; 
@@ -67,42 +75,31 @@
   background: var(--white);
   border-radius: 2px;
   transition: transform var(--transition), opacity var(--transition), width var(--transition);
-  transform-origin: center;
 }
 
-/* ── Animación del botón: Transformación a "X" ──────────────── */
-.menu-checkbox:checked ~ .menu-btn-container .line1 {
-  transform: translateY(7px) rotate(45deg);
-}
-.menu-checkbox:checked ~ .menu-btn-container .line2 {
-  opacity: 0;
-  width: 0;
-}
-.menu-checkbox:checked ~ .menu-btn-container .line3 {
-  transform: translateY(-7px) rotate(-45deg);
-}
+/* Animaciones de hamburguesa a "X" */
+.menu-checkbox:checked ~ .menu-btn-container .line1 { transform: translateY(7px) rotate(45deg); }
+.menu-checkbox:checked ~ .menu-btn-container .line2 { opacity: 0; width: 0; }
+.menu-checkbox:checked ~ .menu-btn-container .line3 { transform: translateY(-7px) rotate(-45deg); }
 
-/* ── Overlay semitransparente (Fondo difuminado de cierre) ───── */
+/* Overlay de fondo */
 .menu-overlay {
   position: fixed;
   inset: 0;
   z-index: 900;
-  background: rgba(15,45,82,.45);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  background: rgba(15,23,42,0.8);
+  backdrop-filter: blur(4px);
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--transition);
-  cursor: pointer;
 }
 
-/* Activa el overlay cuando el menú está abierto */
 .menu-checkbox:checked ~ .menu-overlay {
   opacity: 1;
   pointer-events: all;
 }
 
-/* ── Sidebar con efecto de vidrio esmerilado (Glassmorphism) ── */
+/* Sidebar Estilo Glassmorphism */
 .sidebar-navigation {
   position: fixed;
   top: 0;
@@ -110,10 +107,8 @@
   z-index: 950;
   width: var(--sidebar-w);
   height: 100vh;
-  background: rgba(12,36,65,.93);
-  backdrop-filter: blur(24px) saturate(1.4);
-  -webkit-backdrop-filter: blur(24px) saturate(1.4);
-  border-right: 1px solid rgba(255,255,255,.08);
+  background: rgba(15, 23, 42, 0.98);
+  border-right: 1px solid rgba(255,255,255,.05);
   transform: translateX(calc(-1 * var(--sidebar-w)));
   transition: transform var(--transition);
   display: flex;
@@ -122,86 +117,213 @@
   overflow-y: auto;
 }
 
-/* Desplaza el menú hacia la pantalla al marcar el checkbox */
 .menu-checkbox:checked ~ .sidebar-navigation {
   transform: translateX(0);
 }
 
-/* Cabecera del menú lateral (Título del proyecto) */
 .sidebar-header {
   padding: 80px 24px 20px;
-  border-bottom: 1px solid rgba(255,255,255,.09);
+  border-bottom: 1px solid rgba(255,255,255,.05);
   margin-bottom: 8px;
 }
 
 .sidebar-header h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--white);
-  line-height: 1.3;
+  line-height: 1.4;
 }
 
-/* ── Lista de botones / Links dentro de las pestañas ────────── */
 .sidebar-menu {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
   padding: 8px 12px;
   flex: 1;
 }
 
-/* Elementos interactivos del menú */
 .sidebar-menu label {
   display: flex;
   align-items: center;
-  padding: 10px 14px;
+  padding: 12px 14px;
   border-radius: var(--radius-sm);
-  color: rgba(255,255,255,.65);
-  font-size: .88rem;
-  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--text-muted);
+  font-size: .92rem;
   cursor: pointer;
-  transition: background var(--transition), color var(--transition), padding-left var(--transition);
+  transition: all var(--transition);
   border-left: 3px solid transparent;
-  line-height: 1.4;
 }
 
 .sidebar-menu label:hover {
-  background: rgba(255,255,255,.09);
+  background: rgba(255,255,255,.05);
   color: var(--white);
   padding-left: 20px;
 }
 
 .sidebar-menu label.active {
-  background: rgba(200,135,58,.2);
+  background: rgba(200,135,58,.15);
   color: var(--accent-lt);
   border-left-color: var(--accent);
-  padding-left: 17px;
 }
 
-/* ── Control de visualización de pestañas (Agregado obligatorio) ── */
+/* Control Modular de Secciones */
 section {
-  display: none; /* Mantiene ocultas todas las secciones por defecto */
+  display: none;
 }
 
 section.activa {
-  display: block; /* Muestra únicamente la sección seleccionada */
+  display: block;
   animation: fadeUp .45s ease forwards;
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(15px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Footer ─────────────────────────────────────────────────── */
+/* Estructura Estilo Dashboard */
+.contenedor-tema {
+    max-width: 1300px;
+    margin: 40px auto 0 auto;
+    padding: 0 24px;
+}
+
+.contenedor-tema h2 {
+    font-size: 1.8rem;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.contenedor-tema > p {
+    color: var(--text-muted);
+    margin-bottom: 30px;
+    font-size: 1.05rem;
+}
+
+/* Caja de Búsqueda */
+.search-container {
+    background: var(--card-bg);
+    padding: 24px;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255,255,255,0.05);
+    margin-bottom: 30px;
+}
+
+.search-box {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+    max-width: 450px;
+}
+
+.search-box input {
+    flex: 1;
+    background: #0f172a;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    padding: 10px 16px;
+    color: white;
+    font-size: 1rem;
+}
+
+.search-box button {
+    background: var(--navy-light);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.search-box button:hover { background: #2563eb; }
+
+/* Grid del Cuadro de Mandos (Dashboard) */
+.grid-dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: var(--radius-sm);
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.card h4, .card h3 {
+    font-size: 1.1rem;
+    color: #f1f5f9;
+    margin-bottom: 20px;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 10px;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+/* Ajustes de contenedores para Chart.js */
+.chart-container-pie {
+    position: relative;
+    height: 260px;
+    width: 100%;
+}
+
+.chart-container-line {
+    position: relative;
+    height: 320px;
+    width: 100%;
+}
+
+/* Tablas Estadísticas Estilizadas */
+.tabla-estadistica {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.95rem;
+}
+
+.tabla-estadistica th, .tabla-estadistica td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.tabla-estadistica th {
+    background: rgba(0, 0, 0, 0.2);
+    color: var(--accent-lt);
+    font-weight: 600;
+}
+
+.tabla-estadistica tr:hover {
+    background: rgba(255,255,255,0.02);
+}
+
+.nota-metodo {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 10px;
+    line-height: 1.4;
+}
+
+.dinamico-anio-titulo {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    color: var(--accent-lt);
+}
+
+/* Footer */
 footer {
   text-align: center;
-  padding: 26px 16px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: .72rem;
+  padding: 30px 16px;
+  font-size: .85rem;
   color: var(--text-muted);
-  letter-spacing: .1em;  
-  border-top: 1px solid var(--sand);
-  margin-top: 36px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  margin-top: 60px;
 }
