@@ -5,159 +5,172 @@
 const dataMaster = {
     "2014": {
         meses: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-        urbano: [99, 69, 83, 71, 79, 71, 55, 82, 64, 57, 62, 76], // [cite: 2]
-        rural: [52, 32, 46, 49, 28, 44, 27, 32, 26, 25, 44, 37], // [cite: 2]
-        hombres: [126, 88, 110, 105, 88, 100, 74, 99, 78, 67, 94, 95], // [cite: 3]
-        mujeres: [25, 13, 19, 15, 19, 15, 8, 15, 12, 15, 12, 18], // [cite: 3]
-        rangosEdad: { "Niño": 30, "Adolescente": 52, "Joven": 519, "Adulto": 646, "Adulto Mayor": 63 }, // [cite: 4]
-        edadMedia: 34.01, // [cite: 4]
-        edadMediana: 31, // [cite: 4]
-        edadModa: ["20"], // [cite: 4]
-        edadModaFrecuencia: 57 // [cite: 4]
+        urbano: [99, 69, 83, 71, 79, 71, 55, 82, 64, 57, 62, 76],
+        rural: [52, 32, 46, 49, 28, 44, 27, 32, 26, 25, 44, 37],
+        hombres: [126, 88, 110, 105, 88, 100, 74, 99, 78, 67, 94, 95],
+        mujeres: [25, 13, 19, 15, 19, 15, 8, 15, 12, 15, 12, 18],
+        rangosEdad: { "Niño": 30, "Adolescente": 52, "Joven": 519, "Adulto": 646, "Adulto mayor": 63 },
+        edadMedia: 34.01,
+        edadMediana: 31,
+        edadModa: ["20"],
+        edadModaFrecuencia: 57,
+        edadModaRelativa: "4.35%"
     },
     "2015": {
         meses: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-        urbano: [54, 55, 81, 59, 68, 65, 47, 57, 49, 53, 52, 57], // [cite: 2]
-        rural: [44, 27, 25, 26, 27, 35, 28, 21, 33, 36, 30, 21], // [cite: 2]
-        hombres: [87, 73, 83, 74, 83, 82, 59, 63, 67, 75, 69, 62], // [cite: 3]
-        mujeres: [11, 9, 23, 11, 12, 18, 16, 15, 15, 14, 13, 16], // [cite: 3]
-        rangosEdad: { "Niño": 29, "Adolescente": 37, "Joven": 391, "Adulto": 529, "Adulto Mayor": 64 }, // [cite: 4]
-        edadMedia: 35.32, // [cite: 4]
-        edadMediana: 32, // [cite: 4]
-        edadModa: ["28"], // [cite: 4]
-        edadModaFrecuencia: 49 // [cite: 4]
+        urbano: [54, 55, 81, 59, 68, 65, 47, 57, 49, 53, 52, 57],
+        rural: [44, 27, 25, 26, 27, 35, 28, 21, 33, 36, 30, 21],
+        hombres: [87, 73, 83, 74, 83, 82, 59, 63, 67, 75, 69, 62],
+        mujeres: [11, 9, 23, 11, 12, 18, 16, 15, 15, 14, 13, 16],
+        rangosEdad: { "Niño": 29, "Adolescente": 37, "Joven": 391, "Adulto": 529, "Adulto mayor": 64 },
+        edadMedia: 35.32,
+        edadMediana: 32,
+        edadModa: ["28"],
+        edadModaFrecuencia: 49,
+        edadModaRelativa: "4.67%"
     },
     "2016": {
         meses: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-        urbano: [68, 49, 48, 58, 60, 50, 50, 43, 49, 40, 47, 44], // [cite: 2]
-        rural: [31, 24, 30, 19, 29, 34, 37, 29, 33, 16, 42, 29], // [cite: 2]
-        hombres: [83, 54, 67, 66, 68, 65, 73, 60, 65, 46, 69, 62], // [cite: 3]
-        mujeres: [16, 19, 11, 11, 21, 18, 14, 12, 17, 10, 17, 11], // [cite: 3]
-        rangosEdad: { "Niño": 24, "Adolescente": 35, "Joven": 331, "Adulto": 505, "Adulto Mayor": 58 }, // [cite: 4]
-        edadMedia: 35.34, // [cite: 4]
-        edadMediana: 32, // [cite: 4]
-        edadModa: ["25"], // [cite: 4]
-        edadModaFrecuencia: 38 // [cite: 4]
+        urbano: [68, 49, 48, 58, 60, 50, 50, 43, 49, 40, 47, 44],
+        rural: [31, 24, 30, 19, 29, 34, 37, 29, 33, 16, 42, 29],
+        hombres: [83, 54, 67, 66, 68, 65, 73, 60, 65, 46, 69, 62],
+        mujeres: [16, 19, 11, 11, 21, 18, 14, 12, 17, 10, 17, 11],
+        rangosEdad: { "Niño": 24, "Adolescente": 35, "Joven": 331, "Adulto": 505, "Adulto mayor": 58 },
+        edadMedia: 35.34,
+        edadMediana: 32,
+        edadModa: ["25"],
+        edadModaFrecuencia: 38,
+        edadModaRelativa: "3.96%"
     },
     "2017": {
         meses: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-        urbano: [59, 52, 58, 50, 62, 55, 51, 40, 51, 40, 43, 50], // [cite: 2]
-        rural: [36, 38, 35, 36, 28, 25, 24, 28, 20, 29, 22, 38], // [cite: 2]
-        hombres: [69, 68, 77, 70, 75, 62, 58, 51, 59, 60, 56, 69], // [cite: 3]
-        mujeres: [26, 22, 16, 16, 15, 18, 17, 17, 12, 9, 9, 19], // [cite: 3]
-        rangosEdad: { "Niño": 17, "Adolescente": 30, "Joven": 339, "Adulto": 532, "Adulto Mayor": 51 }, // [cite: 4]
-        edadMedia: 35.91, // [cite: 4]
-        edadMediana: 33, // [cite: 4]
-        edadModa: ["22", "24"], // [cite: 4]
-        edadModaFrecuencia: 34 // [cite: 4]
+        urbano: [59, 52, 58, 50, 62, 55, 51, 40, 51, 40, 43, 50],
+        rural: [36, 38, 35, 36, 28, 25, 24, 28, 20, 29, 22, 38],
+        hombres: [69, 68, 77, 70, 75, 62, 58, 51, 59, 60, 56, 69],
+        mujeres: [26, 22, 16, 16, 15, 18, 17, 17, 12, 9, 9, 19],
+        rangosEdad: { "Niño": 17, "Adolescente": 30, "Joven": 339, "Adulto": 532, "Adulto mayor": 51 },
+        edadMedia: 35.91,
+        edadMediana: 33,
+        edadModa: ["22", "24"],
+        edadModaFrecuencia: 34,
+        edadModaRelativa: "3.51%"
     },
     "2018": {
         meses: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-        urbano: [48, 60, 52, 72, 67, 53, 49, 53, 69, 47, 51, 47], // [cite: 2]
-        rural: [25, 26, 37, 27, 31, 23, 22, 23, 20, 29, 32, 33], // [cite: 2]
-        hombres: [62, 77, 73, 85, 82, 66, 64, 65, 76, 65, 74, 67], // [cite: 3]
-        mujeres: [11, 9, 16, 14, 16, 10, 7, 11, 13, 11, 9, 13], // [cite: 3]
-        rangosEdad: { "Niño": 16, "Adolescente": 24, "Joven": 373, "Adulto": 520, "Adulto Mayor": 63 }, // [cite: 4]
-        edadMedia: 35.92, // [cite: 4]
-        edadMediana: 33, // [cite: 4]
-        edadModa: ["24", "26"], // [cite: 4]
-        edadModaFrecuencia: 41 // [cite: 4]
+        urbano: [48, 60, 52, 72, 67, 53, 49, 53, 69, 47, 51, 47],
+        rural: [25, 26, 37, 27, 31, 23, 22, 23, 20, 29, 32, 33],
+        hombres: [62, 77, 73, 85, 82, 66, 64, 65, 76, 65, 74, 67],
+        mujeres: [11, 9, 16, 14, 16, 10, 7, 11, 13, 11, 9, 13],
+        rangosEdad: { "Niño": 16, "Adolescente": 24, "Joven": 373, "Adulto": 520, "Adulto mayor": 63 },
+        edadMedia: 35.92,
+        edadMediana: 33,
+        edadModa: ["24", "26"],
+        edadModaFrecuencia: 41,
+        edadModaRelativa: "4.12%"
     },
     "2019": {
         meses: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-        urbano: [59, 56, 54, 77, 72, 62, 64, 56, 74, 73, 82, 81], // [cite: 2]
-        rural: [24, 31, 29, 41, 31, 39, 26, 33, 21, 42, 29, 33], // [cite: 2]
-        hombres: [73, 78, 69, 104, 92, 87, 78, 84, 81, 99, 93, 98], // [cite: 3]
-        mujeres: [9, 9, 14, 14, 11, 14, 12, 5, 14, 15, 18, 16], // [cite: 3]
-        rangosEdad: { "Niño": 19, "Adolescente": 32, "Joven": 416, "Adulto": 653, "Adulto Mayor": 64 }, // [cite: 4]
-        edadMedia: 35.39, // [cite: 4]
-        edadMediana: 33, // [cite: 4]
-        edadModa: ["25"], // [cite: 4]
-        edadModaFrecuencia: 56 // [cite: 4]
+        urbano: [59, 56, 54, 77, 72, 62, 64, 56, 74, 73, 82, 81],
+        rural: [24, 31, 29, 41, 31, 39, 26, 33, 21, 42, 29, 33],
+        hombres: [73, 78, 69, 104, 92, 87, 78, 84, 81, 99, 93, 98],
+        mujeres: [9, 9, 14, 14, 11, 14, 12, 5, 14, 15, 18, 16],
+        rangosEdad: { "Niño": 19, "Adolescente": 32, "Joven": 416, "Adulto": 653, "Adulto mayor": 64 },
+        edadMedia: 35.39,
+        edadMediana: 33,
+        edadModa: ["25"],
+        edadModaFrecuencia: 56,
+        edadModaRelativa: "4.71%"
     },
     "2020": {
         meses: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-        urbano: [86, 87, 55, 65, 62, 76, 70, 88, 75, 101, 113, 114], // [cite: 2]
-        rural: [27, 29, 25, 23, 34, 39, 24, 34, 30, 37, 35, 43], // [cite: 2]
-        hombres: [101, 104, 71, 74, 82, 96, 84, 109, 93, 128, 125, 139], // [cite: 3]
-        mujeres: [12, 12, 9, 14, 14, 19, 10, 13, 12, 10, 23, 17], // [cite: 3]
-        rangosEdad: { "Niño": 29, "Adolescente": 35, "Joven": 431, "Adulto": 813, "Adulto Mayor": 56 }, // [cite: 4]
-        edadMedia: 35.42, // [cite: 4]
-        edadMediana: 34, // [cite: 4]
-        edadModa: ["35"], // [cite: 4]
-        edadModaFrecuencia: 66 // [cite: 4]
+        urbano: [86, 87, 55, 65, 62, 76, 70, 88, 75, 101, 113, 114],
+        rural: [27, 29, 25, 23, 34, 39, 24, 34, 30, 37, 35, 43],
+        hombres: [101, 104, 71, 74, 82, 96, 84, 109, 93, 128, 125, 139],
+        mujeres: [12, 12, 9, 14, 14, 19, 10, 13, 12, 10, 23, 17],
+        rangosEdad: { "Niño": 29, "Adolescente": 35, "Joven": 431, "Adulto": 813, "Adulto mayor": 56 },
+        edadMedia: 35.42,
+        edadMediana: 34,
+        edadModa: ["35"],
+        edadModaFrecuencia: 66,
+        edadModaRelativa: "4.81%"
     },
     "2021": {
         meses: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-        urbano: [91, 179, 134, 136, 124, 132, 145, 159, 292, 176, 238, 180], // [cite: 2]
-        rural: [31, 47, 39, 40, 48, 38, 53, 44, 33, 49, 44, 43], // [cite: 2]
-        hombres: [113, 213, 147, 151, 150, 155, 180, 187, 300, 203, 262, 208], // [cite: 3]
-        mujeres: [9, 13, 26, 25, 22, 15, 18, 16, 25, 22, 20, 15], // [cite: 3]
-        rangosEdad: { "Niño": 23, "Adolescente": 57, "Joven": 935, "Adulto": 1384, "Adulto Mayor": 56 }, // [cite: 4]
-        edadMedia: 33.53, // [cite: 4]
-        edadMediana: 32, // [cite: 4]
-        edadModa: ["30"], // [cite: 4]
-        edadModaFrecuencia: 119 // [cite: 4]
+        urbano: [91, 179, 134, 136, 124, 132, 145, 159, 292, 176, 238, 180],
+        rural: [31, 47, 39, 40, 48, 38, 53, 44, 33, 49, 44, 43],
+        hombres: [113, 213, 147, 151, 150, 155, 180, 187, 300, 203, 262, 208],
+        mujeres: [9, 13, 26, 25, 22, 15, 18, 16, 25, 22, 20, 15],
+        rangosEdad: { "Niño": 23, "Adolescente": 57, "Joven": 935, "Adulto": 1384, "Adulto mayor": 56 },
+        edadMedia: 33.53,
+        edadMediana: 32,
+        edadModa: ["30"],
+        edadModaFrecuencia: 119,
+        edadModaRelativa: "4.77%"
     },
     "2022": {
         meses: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-        urbano: [257, 255, 280, 318, 364, 304, 323, 329, 390, 388, 354, 428], // [cite: 2]
-        rural: [61, 62, 70, 55, 71, 59, 88, 72, 93, 89, 71, 105], // [cite: 2]
-        hombres: [295, 286, 311, 337, 402, 327, 369, 363, 440, 435, 393, 481], // [cite: 3]
-        mujeres: [22, 27, 33, 36, 33, 35, 40, 35, 40, 41, 30, 52], // [cite: 3]
-        rangosEdad: { "Niño": 46, "Adolescente": 158, "Joven": 2070, "Adulto": 2439, "Adulto Mayor": 90 }, // [cite: 4]
-        edadMedia: 32.38, // [cite: 4]
-        edadMediana: 30, // [cite: 4]
-        edadModa: ["30"], // [cite: 4]
-        edadModaFrecuencia: 242 // [cite: 4]
+        urbano: [257, 255, 280, 318, 364, 304, 323, 329, 390, 388, 354, 428],
+        rural: [61, 62, 70, 55, 71, 59, 88, 72, 93, 89, 71, 105],
+        hombres: [295, 286, 311, 337, 402, 327, 369, 363, 440, 435, 393, 481],
+        mujeres: [22, 27, 33, 36, 33, 35, 40, 35, 40, 41, 30, 52],
+        rangosEdad: { "Niño": 46, "Adolescente": 158, "Joven": 2070, "Adulto": 2439, "Adulto mayor": 90 },
+        edadMedia: 32.38,
+        edadMediana: 30,
+        edadModa: ["30"],
+        edadModaFrecuencia: 242,
+        edadModaRelativa: "4.95%"
     },
     "2023": {
         meses: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-        urbano: [438, 430, 532, 534, 557, 582, 659, 480, 653, 643, 598, 601], // [cite: 2]
-        rural: [96, 75, 127, 111, 105, 128, 136, 122, 128, 190, 168, 155], // [cite: 2]
-        hombres: [500, 455, 596, 601, 618, 663, 723, 553, 715, 768, 712, 702], // [cite: 3]
-        mujeres: [33, 47, 61, 42, 43, 40, 69, 49, 60, 61, 48, 50], // [cite: 3]
-        rangosEdad: { "Niño": 62, "Adolescente": 315, "Joven": 3483, "Adulto": 4006, "Adulto Mayor": 113 }, // [cite: 4]
-        edadMedia: 31.89, // [cite: 4]
-        edadMediana: 30, // [cite: 4]
-        edadModa: ["30"], // [cite: 4]
-        edadModaFrecuencia: 471 // [cite: 4]
+        urbano: [438, 430, 532, 534, 557, 582, 659, 480, 653, 643, 598, 601],
+        rural: [96, 75, 127, 111, 105, 128, 136, 122, 128, 190, 168, 155],
+        hombres: [500, 455, 596, 601, 618, 663, 723, 553, 715, 768, 712, 702],
+        mujeres: [33, 47, 61, 42, 43, 40, 69, 49, 60, 61, 48, 50],
+        rangosEdad: { "Niño": 62, "Adolescente": 315, "Joven": 3483, "Adulto": 4006, "Adulto mayor": 113 },
+        edadMedia: 31.89,
+        edadMediana: 30,
+        edadModa: ["30"],
+        edadModaFrecuencia: 471,
+        edadModaRelativa: "5.71%"
     },
     "2024": {
         meses: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-        urbano: [387, 259, 401, 401, 449, 459, 445, 454, 487, 548, 523, 549], // [cite: 2]
-        rural: [120, 129, 135, 125, 136, 152, 155, 167, 123, 152, 143, 164], // [cite: 2]
-        hombres: [459, 351, 492, 491, 543, 561, 564, 574, 561, 640, 616, 655], // [cite: 3]
-        mujeres: [44, 34, 43, 32, 40, 46, 35, 44, 47, 56, 47, 53], // [cite: 3]
-        rangosEdad: { "Niño": 42, "Adolescente": 373, "Joven": 2879, "Adulto": 3467, "Adulto Mayor": 128 }, // [cite: 4]
-        edadMedia: 32.32, // [cite: 4]
-        edadMediana: 30, // [cite: 4]
-        edadModa: ["30"], // [cite: 4]
-        edadModaFrecuencia: 315 // [cite: 4]
+        urbano: [387, 259, 401, 401, 449, 459, 445, 454, 487, 548, 523, 549],
+        rural: [120, 129, 135, 125, 136, 152, 155, 167, 123, 152, 143, 164],
+        hombres: [459, 351, 492, 491, 543, 561, 564, 574, 561, 640, 616, 655],
+        mujeres: [44, 34, 43, 32, 40, 46, 35, 44, 47, 56, 47, 53],
+        rangosEdad: { "Niño": 42, "Adolescente": 373, "Joven": 2879, "Adulto": 3467, "Adulto mayor": 128 },
+        edadMedia: 32.32,
+        edadMediana: 30,
+        edadModa: ["30"],
+        edadModaFrecuencia: 315,
+        edadModaRelativa: "4.46%"
     },
     "2025": {
         meses: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-        urbano: [645, 612, 708, 574, 742, 446, 459, 572, 613, 550, 665, 624], // [cite: 2]
-        rural: [155, 139, 149, 168, 193, 128, 178, 199, 158, 232, 193, 179], // [cite: 2]
-        hombres: [727, 687, 791, 688, 831, 519, 591, 685, 701, 707, 781, 727], // [cite: 3]
-        mujeres: [71, 63, 62, 49, 98, 51, 45, 74, 67, 72, 70, 66], // [cite: 3]
-        rangosEdad: { "Niño": 46, "Adolescente": 539, "Joven": 3824, "Adulto": 4433, "Adulto Mayor": 144 }, // [cite: 4]
-        edadMedia: 30.00, // [cite: 4]
-        edadMediana: 30, // [cite: 4]
-        edadModa: ["25"], // [cite: 4]
-        edadModaFrecuencia: 461 // [cite: 4]
+        urbano: [645, 612, 708, 574, 742, 446, 459, 572, 613, 550, 665, 624],
+        rural: [155, 139, 149, 168, 193, 128, 178, 199, 158, 232, 193, 179],
+        hombres: [727, 687, 791, 688, 831, 519, 591, 685, 701, 707, 781, 727],
+        mujeres: [71, 63, 62, 49, 98, 51, 45, 74, 67, 72, 70, 66],
+        rangosEdad: { "Niño": 46, "Adolescente": 539, "Joven": 3824, "Adulto": 4433, "Adulto mayor": 144 },
+        edadMedia: 30.00,
+        edadMediana: 30,
+        edadModa: ["25"],
+        edadModaFrecuencia: 461,
+        edadModaRelativa: "4.97%"
     },
-    "2026": { // Solo cuenta con registros de 4 meses (Ene - Abr) [cite: 2]
+    "2026": {
         meses: ["Ene", "Feb", "Mar", "Abr"],
-        urbano: [574, 528, 498, 523], // [cite: 2]
-        rural: [185, 154, 166, 150], // [cite: 2]
-        hombres: [703, 630, 595, 603], // [cite: 3]
-        mujeres: [32, 28, 30, 32], // [cite: 3]
-        rangosEdad: { "Niño": 11, "Adolescente": 194, "Joven": 1188, "Adulto": 1269, "Adulto Mayor": 38 }, // [cite: 4]
-        edadMedia: 29.00, // [cite: 4]
-        edadMediana: 29, // [cite: 4]
-        edadModa: ["25"], // [cite: 4]
-        edadModaFrecuencia: 129 // [cite: 4]
+        urbano: [574, 528, 498, 523],
+        rural: [185, 154, 166, 150],
+        hombres: [703, 630, 595, 603],
+        mujeres: [32, 28, 30, 32],
+        rangosEdad: { "Niño": 11, "Adolescente": 194, "Joven": 1188, "Adulto": 1269, "Adulto mayor": 38 },
+        edadMedia: 29.00,
+        edadMediana: 29,
+        edadModa: ["25"],
+        edadModaFrecuencia: 129,
+        edadModaRelativa: "4.64%"
     }
 };
 
@@ -301,10 +314,10 @@ function procesarArea(d) {
     document.getElementById('tablaAreaContenedor').innerHTML = `
         <table class="tabla-estadistica">
             <thead>
-                <tr><th>Métrica Mensual</th><th>Área Urbana</th><th>Área Rural</th></tr>
+                <tr><th>Métrica</th><th>Área urbana</th><th>Área rural</th></tr>
             </thead>
             <tbody>
-                <tr><td><strong>Media (Promedio)</strong></td><td>${calcularMedia(d.urbano)}</td><td>${calcularMedia(d.rural)}</td></tr>
+                <tr><td><strong>Media (promedio)</strong></td><td>${calcularMedia(d.urbano)}</td><td>${calcularMedia(d.rural)}</td></tr>
                 <tr><td><strong>Mediana</strong></td><td>${calcularMediana(d.urbano)}</td><td>${calcularMediana(d.rural)}</td></tr>
             </tbody>
         </table>
@@ -358,10 +371,10 @@ function procesarSexo(d) {
     document.getElementById('tablaSexoContenedor').innerHTML = `
         <table class="tabla-estadistica">
             <thead>
-                <tr><th>Métrica Mensual</th><th>Hombres</th><th>Mujeres</th></tr>
+                <tr><th>Métrica</th><th>Hombres</th><th>Mujeres</th></tr>
             </thead>
             <tbody>
-                <tr><td><strong>Media (Promedio)</strong></td><td>${calcularMedia(d.hombres)}</td><td>${calcularMedia(d.mujeres)}</td></tr>
+                <tr><td><strong>Media (promedio)</strong></td><td>${calcularMedia(d.hombres)}</td><td>${calcularMedia(d.mujeres)}</td></tr>
                 <tr><td><strong>Mediana</strong></td><td>${calcularMediana(d.hombres)}</td><td>${calcularMediana(d.mujeres)}</td></tr>
             </tbody>
         </table>
@@ -413,13 +426,14 @@ function procesarEdad(d) {
     document.getElementById('tablaEdadContenedor').innerHTML = `
         <table class="tabla-estadistica">
             <thead>
-                <tr><th>Variable / Métricas Estadísticas de Edad</th><th>Valor Registrado en el Excel</th></tr>
+                <tr><th>Métrica</th><th>Valor</th></tr>
             </thead>
             <tbody>
-                <tr><td><strong>Edad Media (Promedio global)</strong></td><td>${d.edadMedia} años</td></tr>
-                <tr><td><strong>Mediana de Edad</strong></td><td>${d.edadMediana} años </td></tr>
-                <tr><td><strong>Moda (Edad con mayor reincidencia)</strong></td><td>${formatoModa}</td></tr>
-                <tr><td><strong>Frecuencia Absoluta de la Moda</strong></td><td>Se repitió ${d.edadModaFrecuencia} veces en las actas</td></tr>
+                <tr><td><strong>Edad promedio</strong></td><td>${d.edadMedia} años</td></tr>
+                <tr><td><strong>Mediana de edad</strong></td><td>${d.edadMediana} años</td></tr>
+                <tr><td><strong>Moda de edad</strong></td><td>${formatoModa}</td></tr>
+                <tr><td><strong>Frecuencia absoluta de la moda</strong></td><td>${d.edadModaFrecuencia} casos</td></tr>
+                <tr><td><strong>Frecuencia relativa de la moda</strong></td><td>${d.edadModaRelativa.replace('%', ' %')}</td></tr>
             </tbody>
         </table>
     `;
@@ -442,7 +456,7 @@ function renderizarPestañaComparativa() {
     document.getElementById('tablaComparativaContenedor').innerHTML = `
         <table class="tabla-estadistica">
             <thead>
-                <tr><th>Año de Registro</th><th>Total Homicidios Intencionales</th><th>Promedio Mensual</th><th>Promedio Diario</th></tr>
+                <tr><th>Año de registro</th><th>Total homicidios intencionales</th><th>Promedio mensual</th><th>Promedio diario</th></tr>
             </thead>
             <tbody>
                 ${rowsHtml}
