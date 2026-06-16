@@ -188,13 +188,14 @@ const dataHistorica = [
     { anio: 2023, total: 8248, tasa: 46.25, promedioMes: 687.33, promedioDia: 22.60 }, // [cite: 1]
     { anio: 2024, total: 7063, tasa: 39.31, promedioMes: 588.58, promedioDia: 19.30 }, // [cite: 1]
     { anio: 2025, total: 9281, tasa: 51.27, promedioMes: 773.42, promedioDia: 25.43 }, // [cite: 1]
-    { anio: 2026, total: 2778, tasa: 45.68, promedioMes: 231.50, promedioDia: 23.15 }  // [cite: 1]
+    { anio: 2026, total: 2778, tasa: 45.68, promedioMes: 694.50, promedioDia: 23.15 }  // [cite: 1]
 ];
 
 // ============================================================================
 // COMPONENTE DE SEGURO DE CANVAS (MANEJADOR DE MEMORIA PARA CHART.JS)
 // ============================================================================
 const chartInstances = {};
+Chart.register(ChartDataLabels);
 
 function destruirGraficoSiExiste(idCanvas) {
     if (chartInstances[idCanvas]) {
@@ -280,9 +281,16 @@ function consultarPorAnio(seccion) {
     const datos = dataMaster[anioInput];
     const panel = document.getElementById(`resultados${seccion.charAt(0).toUpperCase() + seccion.slice(1)}`);
     panel.style.display = "block";
-    
-    panel.querySelectorAll(".txt-anio").forEach(el => el.textContent = anioInput);
 
+    if (seccion === 'area') document.querySelector('#chartAreaLine').closest('.card').querySelector('h4').textContent = `Tendencia del año ${anioInput}`;
+    if (seccion === 'sexo') document.querySelector('#chartSexoLine').closest('.card').querySelector('h4').textContent = `Tendencia del año ${anioInput}`;
+    
+const registroAnual = dataHistorica.find(item => item.anio == anioInput);
+    const totalHomicidios = registroAnual ? registroAnual.total.toLocaleString() : "0";
+    
+    panel.querySelectorAll(".txt-anio").forEach(el => {
+        el.textContent = `${anioInput} (total homicidios intencionales: ${totalHomicidios})`;
+    });
     if (seccion === 'area') procesarArea(datos);
     if (seccion === 'sexo') procesarSexo(datos);
     if (seccion === 'edad') procesarEdad(datos);
@@ -307,7 +315,11 @@ function procesarArea(d) {
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { position: 'bottom', labels: { color: '#e2e8f0' } } }
+            plugins: {
+                legend: { position: 'bottom', labels: { color: '#e2e8f0' } },
+                tooltip: { callbacks: { label: (ctx) => ` ${parseFloat(ctx.parsed).toFixed(1)}%` } },
+                datalabels: { display: false }
+            }
         }
     });
 
@@ -364,7 +376,11 @@ function procesarSexo(d) {
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { position: 'bottom', labels: { color: '#e2e8f0' } } }
+            plugins: {
+                legend: { position: 'bottom', labels: { color: '#e2e8f0' } },
+                tooltip: { callbacks: { label: (ctx) => ` ${parseFloat(ctx.parsed).toFixed(1)}%` } },
+                datalabels: { display: false }
+            }
         }
     });
 
@@ -407,17 +423,24 @@ function procesarEdad(d) {
     const etiquetas = Object.keys(d.rangosEdad);
     const valores = Object.values(d.rangosEdad);
 
+    const totalEdad = valores.reduce((a, b) => a + b, 0);
+    const etiquetasConCantidad = etiquetas.map((e, i) => `${e} (${valores[i].toLocaleString()})`);
+
     destruirGraficoSiExiste('chartEdadPie');
     chartInstances['chartEdadPie'] = new Chart(document.getElementById('chartEdadPie').getContext('2d'), {
         type: 'pie',
         data: {
-            labels: etiquetas,
+            labels: etiquetasConCantidad,
             datasets: [{ data: valores, backgroundColor: ['#2b5f9e', '#c8873a', '#1a4070', '#e9a95c', '#64748b'], borderColor: '#1e293b', borderWidth: 2 }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { position: 'bottom', labels: { color: '#e2e8f0' } } }
+            plugins: {
+                legend: { position: 'bottom', labels: { color: '#e2e8f0' } },
+                tooltip: { callbacks: { label: (ctx) => ` ${((ctx.parsed / totalEdad) * 100).toFixed(1)}%` } },
+                datalabels: { display: false }
+            }
         }
     });
 
