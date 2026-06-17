@@ -35,6 +35,7 @@ const dataMaster = {
         rural: [31, 24, 30, 19, 29, 34, 37, 29, 33, 16, 42, 29],
         hombres: [83, 54, 67, 66, 68, 65, 73, 60, 65, 46, 69, 62],
         mujeres: [16, 19, 11, 11, 21, 18, 14, 12, 17, 10, 17, 11],
+        sinDatos: [4],
         rangosEdad: { "Niño": 24, "Adolescente": 35, "Joven": 331, "Adulto": 505, "Adulto mayor": 58 },
         edadMedia: 35.34,
         edadMediana: 32,
@@ -74,6 +75,7 @@ const dataMaster = {
         rural: [24, 31, 29, 41, 31, 39, 26, 33, 21, 42, 29, 33],
         hombres: [73, 78, 69, 104, 92, 87, 78, 84, 81, 99, 93, 98],
         mujeres: [9, 9, 14, 14, 11, 14, 12, 5, 14, 15, 18, 16],
+        sinDatos: [2],
         rangosEdad: { "Niño": 19, "Adolescente": 32, "Joven": 416, "Adulto": 653, "Adulto mayor": 64 },
         edadMedia: 35.39,
         edadMediana: 33,
@@ -87,6 +89,7 @@ const dataMaster = {
         rural: [27, 29, 25, 23, 34, 39, 24, 34, 30, 37, 35, 43],
         hombres: [101, 104, 71, 74, 82, 96, 84, 109, 93, 128, 125, 139],
         mujeres: [12, 12, 9, 14, 14, 19, 10, 13, 12, 10, 23, 17],
+        sinDatos: [1],
         rangosEdad: { "Niño": 29, "Adolescente": 35, "Joven": 431, "Adulto": 813, "Adulto mayor": 56 },
         edadMedia: 35.42,
         edadMediana: 34,
@@ -113,6 +116,7 @@ const dataMaster = {
         rural: [61, 62, 70, 55, 71, 59, 88, 72, 93, 89, 71, 105],
         hombres: [295, 286, 311, 337, 402, 327, 369, 363, 440, 435, 393, 481],
         mujeres: [22, 27, 33, 36, 33, 35, 40, 35, 40, 41, 30, 52],
+        sinDatos: [23],
         rangosEdad: { "Niño": 46, "Adolescente": 158, "Joven": 2070, "Adulto": 2439, "Adulto mayor": 90 },
         edadMedia: 32.38,
         edadMediana: 30,
@@ -126,6 +130,7 @@ const dataMaster = {
         rural: [96, 75, 127, 111, 105, 128, 136, 122, 128, 190, 168, 155],
         hombres: [500, 455, 596, 601, 618, 663, 723, 553, 715, 768, 712, 702],
         mujeres: [33, 47, 61, 42, 43, 40, 69, 49, 60, 61, 48, 50],
+        sinDatos: [39],
         rangosEdad: { "Niño": 62, "Adolescente": 315, "Joven": 3483, "Adulto": 4006, "Adulto mayor": 113 },
         edadMedia: 31.89,
         edadMediana: 30,
@@ -139,6 +144,7 @@ const dataMaster = {
         rural: [120, 129, 135, 125, 136, 152, 155, 167, 123, 152, 143, 164],
         hombres: [459, 351, 492, 491, 543, 561, 564, 574, 561, 640, 616, 655],
         mujeres: [44, 34, 43, 32, 40, 46, 35, 44, 47, 56, 47, 53],
+        sinDatos: [35],
         rangosEdad: { "Niño": 42, "Adolescente": 373, "Joven": 2879, "Adulto": 3467, "Adulto mayor": 128 },
         edadMedia: 32.32,
         edadMediana: 30,
@@ -152,6 +158,7 @@ const dataMaster = {
         rural: [155, 139, 149, 168, 193, 128, 178, 199, 158, 232, 193, 179],
         hombres: [727, 687, 791, 688, 831, 519, 591, 685, 701, 707, 781, 727],
         mujeres: [71, 63, 62, 49, 98, 51, 45, 74, 67, 72, 70, 66],
+        sinDatos: [58],
         rangosEdad: { "Niño": 46, "Adolescente": 539, "Joven": 3824, "Adulto": 4433, "Adulto mayor": 144 },
         edadMedia: 30.00,
         edadMediana: 30,
@@ -165,6 +172,7 @@ const dataMaster = {
         rural: [185, 154, 166, 150],
         hombres: [703, 630, 595, 603],
         mujeres: [32, 28, 30, 32],
+        sinDatos: [10],
         rangosEdad: { "Niño": 11, "Adolescente": 194, "Joven": 1188, "Adulto": 1269, "Adulto mayor": 38 },
         edadMedia: 29.00,
         edadMediana: 29,
@@ -305,6 +313,7 @@ function procesarArea(d) {
     const pctU = ((totalU / total) * 100).toFixed(1);
     const pctR = ((totalR / total) * 100).toFixed(1);
 
+
     destruirGraficoSiExiste('chartAreaPie');
     chartInstances['chartAreaPie'] = new Chart(document.getElementById('chartAreaPie').getContext('2d'), {
         type: 'pie',
@@ -361,17 +370,37 @@ function procesarArea(d) {
 function procesarSexo(d) {
     const totalH = d.hombres.reduce((a, b) => a + b, 0);
     const totalM = d.mujeres.reduce((a, b) => a + b, 0);
-    const total = totalH + totalM;
+    const totalSD = d.sinDatos ? d.sinDatos.reduce((a, b) => a + b, 0) : 0;
+    const total = totalH + totalM + totalSD;
 
-    const pctH = ((totalH / total) * 100).toFixed(1);
-    const pctM = ((totalM / total) * 100).toFixed(1);
 
+const pctH = ((totalH / total) * 100).toFixed(1);
+const pctM = ((totalM / total) * 100).toFixed(1);
+const pctSD = ((totalSD / total) * 100).toFixed(1);
+
+    
+
+    
     destruirGraficoSiExiste('chartSexoPie');
     chartInstances['chartSexoPie'] = new Chart(document.getElementById('chartSexoPie').getContext('2d'), {
         type: 'pie',
         data: {
-            labels: [`Hombres (${totalH.toLocaleString()})`, `Mujeres (${totalM.toLocaleString()})`],
-            datasets: [{ data: [pctH, pctM], backgroundColor: ['#1a4070', '#e9a95c'], borderColor: '#1e293b', borderWidth: 2 }]
+            labels: [
+    `Hombres (${totalH.toLocaleString()})`,
+    `Mujeres (${totalM.toLocaleString()})`,
+    `Sin datos (${totalSD.toLocaleString()})`
+],
+
+datasets: [{
+    data: [pctH, pctM, pctSD],
+    backgroundColor: [
+        '#1a4070', // Hombres
+        '#e9a95c', // Mujeres
+        '#64748b'  // Sin datos
+    ],
+    borderColor: '#1e293b',
+    borderWidth: 2
+}]
         },
         options: {
             responsive: true,
