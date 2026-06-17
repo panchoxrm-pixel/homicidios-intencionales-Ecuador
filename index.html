@@ -1,205 +1,85 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homicidios intencionales en el Ecuador entre 2014 y 2026</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
-    <script src="homicidios.js" defer></script>
-    <link rel="stylesheet" href="homicidios.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portada — Análisis de Homicidios</title>
+  <link rel="stylesheet" href="homicidios.css" />
+  <link rel="stylesheet" href="portada.css" />
 </head>
 <body>
 
-    <input type="checkbox" id="menu-toggle" class="menu-checkbox">
+<canvas id="bg-canvas"></canvas>
 
-    <label for="menu-toggle" class="menu-btn-container" aria-label="Abrir menú de lecciones">
-        <div class="hamburger-lines">
-            <span class="line line1"></span>
-            <span class="line line2"></span>
-            <span class="line line3"></span>
+<div class="portada-wrapper">
+
+  <main class="hero">
+
+    
+
+    <h1 class="main-title">
+      <span class="word-1">ESTADÍSTICAS DE</span>
+      <span class="word-2">HOMICIDIOS EN </span>
+      <span class="word-3">ECUADOR </span>
+    </h1>
+
+    
+
+    <div class="data-divider">
+      <hr />
+      <div class="data-pill">
+        <div class="data-stat">
+          <div class="num">2014 (Enero)</div>
+          <div class="lbl">Inicio</div>
         </div>
-    </label>
-
-    <label for="menu-toggle" class="menu-overlay"></label>
-
-    <aside class="sidebar-navigation">
-        <div class="sidebar-header">
-            <h3>
-                Homicidios intencionales <br>
-                Ecuador 2014-2026
-            </h3>
+        <div class="data-dot"></div>
+        <div class="data-stat">
+          <div class="num">2026 (Abril)</div>
+          <div class="lbl">Cierre</div>
         </div>
-                
-        <nav class="sidebar-menu">
-            <label for="menu-toggle" onclick="mostrarSeccion('inicio')">Inicio</label>
-            <label for="menu-toggle" onclick="mostrarSeccion('area')">1. Área geográfica de los delitos</label>
-            <label for="menu-toggle" onclick="mostrarSeccion('sexo')">2. Sexo de las víctimas</label>
-            <label for="menu-toggle" onclick="mostrarSeccion('edad')">3. Edad de las víctimas</label>
-            <label for="menu-toggle" onclick="mostrarSeccion('comparacionEntreAnios')">4. Comparación entre años</label>
-        </nav>
-    </aside>
+      </div>
+      <hr />
+    </div>
 
-    <header class="main-desktop-header" style="text-align: center; margin-top: 40px;">
-       <h1>Homicidios intencionales en el Ecuador</h1>
-       <h2>Estadísticas desde enero 2014 hasta abril 2026</h2>       
-    </header>
-
-    <section id="inicio" class="activa">
-        <div style="text-align: center; padding: 20px 20px; max-width: 800px; margin: 0 auto;">
-            <p style="font-size: 1.2rem; color: #a0aec0; max-width: 600px; margin: 0 auto 30px auto; line-height: 1.6;">
-                Esta aplicación web presenta datos estadísticos sobre homicidios intencionales en Ecuador entre enero de 2014 y abril de 2026. La información se basa en datos primarios obtenidos de las páginas oficiales del Ministerio del Interior y del INEC, consultadas el 7 de junio de 2026, las mismas que son de libre acceso para toda la ciudadanía. <br> <br>
-                Las secciones presentan datos de homicidios por año, junto con variables como área, sexo y edad de las víctimas, además de una comparación entre distintos años. <br> <br>
-                La herramienta permite explorar las cifras registradas y obtener métricas estadísticas como porcentaje, media, mediana, moda y tendencia.
-            </p>
-            
-            <button onclick="mostrarSeccion('area')" style="padding: 14px 28px; font-size: 1.1rem; cursor: pointer; background-color: #c8873a; color: white; border: none; border-radius: 8px; font-weight: 600; transition: background 0.2s;">
-                Comenzar análisis →
-            </button>
+    <div class="team-section">
+      <span class="team-label">Equipo</span>
+      <div class="team-cards">
+        <div class="member-card">
+          <div class="member-index">Desarrollador web</div>
+          <div class="member-name">Francisco Rodríguez</div>
         </div>
-    </section>
-
-    <section id="area" class="contenedor-tema">
-        <h2>Área geográfica de los delitos</h2>
-        <p>En esta sección se indican los datos de un año específico de los homicidios intencionales, según el área donde fueron ejecutados, que puede ser urbana o rural.</p>
-        
-        <div class="search-container">
-            <h3>Datos por año</h3>
-            <p>Escriba el año que desea consultar:</p>
-            <div class="search-box">
-                <input type="text" id="inputAnioArea" placeholder="Ej: 2024">
-                <button onclick="consultarPorAnio('area')">Mostrar información</button>
-            </div>
+        <div class="member-card">
+          <div class="member-index">Desarrollador web</div>
+          <div class="member-name">Diego Chicaiza</div>
         </div>
+      </div>
+    </div>
 
-        <div id="resultadosArea" class="resultados-panel" style="display: none;">
-            <h3 class="dinamico-anio-titulo">Resultados para el año <span class="txt-anio"></span></h3>
-            
-            <div class="grid-dashboard">
-                <div class="card chart-card">
-                    <h4>Distribución porcentual por área geográfica</h4>
-                    <div class="chart-container-pie">
-                        <canvas id="chartAreaPie"></canvas>
-                    </div>
-                </div>
-                
-                <div class="card table-card">
-                    <h4>Promedio y mediana mensual</h4>
-                    <div id="tablaAreaContenedor"></div>
-                    <p class="nota-metodo">* El promedio es la suma de los homicidios intencionales del año dividida para los 12 meses del año.</p>
-                    <p class="nota-metodo">* La mediana se obtiene ordenando los datos de los 12 meses de menor a mayor y calculando el promedio de los dos valores centrales.</p>
-                </div>
-            </div>
+    <div class="cta-wrapper">
+      <a href="homicidios.html" class="cta-btn">
+        Ver análisis completo
+        <span class="cta-arrow">→</span>
+      </a>
+    </div>
 
-            <div class="card chart-card full-width">
-                <h4>Tendencia del año</h4>
-                <div class="chart-container-line">
-                    <canvas id="chartAreaLine"></canvas>
-                </div>
-            </div>
-        </div>
-    </section>
+  </main>
+  <footer class="eyebrow">
+      <span class="eyebrow-line"></span>
+      <span>----- Ecuador · 2026 -----</span>
+      <span class="eyebrow-line"></span>
+  </footer>
 
-    <section id="sexo" class="contenedor-tema">
-        <h2>Sexo de las víctimas</h2>
-        <p>En esta sección se muestran los datos de un año específico de los homicidios intencionales, de acuerdo con el sexo de las víctimas.</p>
+  
 
-        <div class="search-container">
-            <h3>Datos por año</h3>
-            <p>Escriba el año que desea consultar:</p>
-            <div class="search-box">
-                <input type="text" id="inputAnioSexo" placeholder="Ej: 2024">
-                <button onclick="consultarPorAnio('sexo')">Mostrar información</button>
-            </div>
-        </div>
+</div>
 
-        <div id="resultadosSexo" class="resultados-panel" style="display: none;">
-            <h3 class="dinamico-anio-titulo">Resultados para el año <span class="txt-anio"></span></h3>
-            
-            <div class="grid-dashboard">
-                <div class="card chart-card">
-                    <h4>Distribución porcentual por sexo</h4>
-                    <div class="chart-container-pie">
-                        <canvas id="chartSexoPie"></canvas>
-                    </div>
-                </div>
-                
-                <div class="card table-card">
-                    <h4>Promedio y mediana mensual</h4>
-                    <div id="tablaSexoContenedor"></div>
-                    <p class="nota-metodo">* El promedio es la suma de los homicidios intencionales del año dividida para los 12 meses del año.</p>
-                    <p class="nota-metodo">* La mediana se obtiene ordenando los datos de los 12 meses de menor a mayor y calculando el promedio de los dos valores centrales.</p>
-                </div>
-            </div>
+<div class="corner-ornament">
+  <span style="width:60px"></span>
+  <span style="width:40px"></span>
+  <span style="width:24px"></span>
+</div>
 
-            <div class="card chart-card full-width">
-                <h4>Tendencia del año</h4>
-                <div class="chart-container-line">
-                    <canvas id="chartSexoLine"></canvas>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="edad" class="contenedor-tema">
-        <h2>Edad de las víctimas</h2>
-        <p>En esta sección se presentan los datos de un año específico de los homicidios intencionales, acorde a las edades y sus rangos.</p>
-
-        <div class="search-container">
-            <h3>Datos por año</h3>
-            <p>Escriba el año que desea consultar:</p>
-            <div class="search-box">
-                <input type="text" id="inputAnioEdad" placeholder="Ej: 2024">
-                <button onclick="consultarPorAnio('edad')">Mostrar información</button>
-            </div>
-        </div>
-
-        <div id="resultadosEdad" class="resultados-panel" style="display: none;">
-            <h3 class="dinamico-anio-titulo">Resultados para el año <span class="txt-anio"></span></h3>
-            
-            <div class="grid-dashboard">
-                <div class="card chart-card">
-                    <h4>Distribución porcentual por rangos de edad</h4>
-                    <div class="chart-container-pie">
-                        <canvas id="chartEdadPie"></canvas>
-                    </div>
-                </div>
-                
-                <div class="card table-card">
-                    <h4>Edad de las víctimas</h4>
-                    <div id="tablaEdadContenedor"></div>
-                    <p class="nota-metodo">* El promedio es el resultado de sumar las edades de las víctimas y dividirlas para el total de homicidios registrados en este año.</p>
-<p class="nota-metodo">* La mediana se obtiene ordenando todas las edades de menor a mayor e identificando el valor central de la lista.</p>
-<p class="nota-metodo">* La moda es la edad que más se repite en los homicidios registrados en este año. Si varias edades comparten la cantidad más alta de casos, se muestran todas.</p>
-<p class="nota-metodo">* La frecuencia absoluta es la cantidad de víctimas registradas en la edad que presenta más casos (moda). La frecuencia relativa indica qué porcentaje representa esa cantidad respecto del total de víctimas registradas en el año.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="comparacionEntreAnios" class="contenedor-tema">
-        <h2>Comparación entre años</h2>
-
-        <div class="grid-dashboard">
-            <div class="card full-width table-card">
-                <h3>Cantidad de homicidios intencionales desde enero 2014 hasta abril 2026</h3>
-                <div id="tablaComparativaContenedor"></div>
-            </div>
-
-            <div class="card full-width chart-card">
-                <h3>Tasa de homicidios por cada 100.000 habitantes (2014-2026)</h3>
-                <div class="chart-container-line">
-                    <canvas id="chartTasaLine"></canvas>
-                </div>
-                <p class="nota-metodo" style="margin-top: 15px;">Nota: La tasa se calcula dividiendo el total de homicidios intencionales de un año para el resultado de la división de la población total de ese año (según las proyecciones del INEC) para 100.000. Solamente para el año 2026 se realiza una proyección, por lo que la fórmula se ajusta al tomar en cuenta únicamente 4 meses.</p>
-
-            </div>
-        </div>
-    </section>
-
-     <footer>
-        Creado por Francisco Rodríguez y Diego Chicaiza
-     </footer>
+<script src="index.js" defer></script>
 
 </body>
 </html>
