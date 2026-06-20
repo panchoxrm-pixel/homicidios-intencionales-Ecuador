@@ -216,7 +216,7 @@ function destruirGraficoSiExiste(idCanvas) {
 // SISTEMA DE CONTROL DE PESTAÑAS (INTERFAZ DE USUARIO)
 // ============================================================================
 function ocultarSecciones(){
-    const ids = ["inicio", "area", "sexo", "edad", "comparacionEntreAnios"];
+    const ids = ["inicio", "area", "sexo", "edad", "comparacionEntreAnios", "operacion"];
     ids.forEach(id => {
         const elemento = document.getElementById(id);
         if (elemento) elemento.classList.remove("activa");
@@ -548,7 +548,405 @@ function renderizarPestañaComparativa() {
     });
 }
 
+// ============================================================================
+// MÓDULO: OPERACIÓN ENTRE AÑOS (media, mediana, moda, porcentaje, tendencia)
+// ============================================================================
+
+// Recibe el texto del input (ej: "2020,2021,2022") y devuelve un arreglo de
+// objetos { anio, total } válidos, tomando el total desde dataHistorica.
+function obtenerDatosDeAnios(textoAnios) {
+    const ANIO_MINIMO = 2014;
+    const ANIO_MAXIMO = 2025;
+
+    const aniosEscritos = textoAnios.split(",").map(a => a.trim()).filter(a => a !== "");
+
+    const datos = [];
+    for (const anioTexto of aniosEscritos) {
+        const anio = Number(anioTexto);
+
+        // Verifica que el año esté dentro del rango permitido (2014 - 2025)
+        if (anio < ANIO_MINIMO || anio > ANIO_MAXIMO) {
+            alert(`El año "${anioTexto}" no es válido. Por favor ingrese años entre ${ANIO_MINIMO} y ${ANIO_MAXIMO}, separados por coma.`);
+            return null;
+        }
+
+        const registro = dataHistorica.find(item => item.anio == anio);
+        if (!registro) {
+            alert(`El año "${anioTexto}" no es válido. Por favor ingrese años entre ${ANIO_MINIMO} y ${ANIO_MAXIMO}, separados por coma.`);
+            return null;
+        }
+
+        // Verifica que el año no haya sido escrito ya antes (no se permiten años repetidos)
+        const yaExiste = datos.some(d => d.anio == anio);
+        if (yaExiste) {
+            console.log(`El año ${anio} está repetido.`);
+            alert(`El año "${anioTexto}" está repetido. Por favor escriba cada año una sola vez.`);
+            return null;
+        }
+
+        datos.push(registro);
+    }
+
+    if (datos.length === 0) {
+        alert("Por favor escriba al menos un año.");
+        return null;
+    }
+
+    // No se permite calcular con un solo año, se necesitan al menos dos para comparar
+    if (datos.length === 1) {
+        console.log("No se puede escribir un solo año. Debe ingresar al menos dos años separados por coma.");
+        alert("No puede escribir un solo año. Por favor ingrese al menos dos años separados por coma.");
+        return null;
+    }
+
+    return datos;
+}
+
+// Recibe el texto del input (ej: "2017-2025") y devuelve un arreglo de
+// objetos { anio, total } válidos, tomando todos los años dentro del intervalo.
+// Se usa solo para PORCENTAJE y TENDENCIA: aquí NO se permiten años sueltos
+// ni separados por coma, únicamente un intervalo con guion.
+function obtenerDatosDeIntervalo(textoIntervalo) {
+    const ANIO_MINIMO = 2014;
+    const ANIO_MAXIMO = 2025;
+
+    // Debe tener exactamente la forma "numero-numero" (ej: 2017-2025)
+    const patronIntervalo = /^(\d{4})-(\d{4})$/;
+    const coincidencia = textoIntervalo.match(patronIntervalo);
+
+    if (!coincidencia) {
+        alert(`Formato no válido. Escriba únicamente un intervalo de años con guion, por ejemplo: ${ANIO_MINIMO}-${ANIO_MAXIMO}. No se permiten años sueltos ni separados por coma.`);
+        return null;
+    }
+
+    const anioInicio = Number(coincidencia[1]);
+    const anioFin = Number(coincidencia[2]);
+
+    if (anioInicio < ANIO_MINIMO || anioInicio > ANIO_MAXIMO || anioFin < ANIO_MINIMO || anioFin > ANIO_MAXIMO) {
+        alert(`Por favor ingrese años entre ${ANIO_MINIMO} y ${ANIO_MAXIMO}.`);
+        return null;
+    }
+
+    if (anioInicio >= anioFin) {
+        alert("El primer año del intervalo debe ser menor que el segundo. Ejemplo: 2017-2025.");
+        return null;
+    }
+
+    // Genera todos los años entre anioInicio y anioFin (incluyendo ambos extremos)
+    const datos = [];
+    for (let anio = anioInicio; anio <= anioFin; anio++) {
+        const registro = dataHistorica.find(item => item.anio == anio);
+        if (registro) datos.push(registro);
+    }
+
+    return datos;
+}
+
+// Calcula la moda de un arreglo de números (puede haber más de un valor)
+function calcularModaArreglo(arr) {
+    const conteo = {};
+    arr.forEach(num => { conteo[num] = (conteo[num] || 0) + 1; });
+
+    const maxFrecuencia = Math.max(...Object.values(conteo));
+
+    // Si todos los valores se repiten la misma cantidad de veces (1 vez cada uno),
+    // no hay una moda real porque ningún valor se repite más que los demás.
+    if (maxFrecuencia === 1) {
+        return { valores: [], frecuencia: 1 };
+    }
+
+    const valoresModa = Object.keys(conteo)
+        .filter(num => conteo[num] === maxFrecuencia)
+        .map(Number);
+
+    return { valores: valoresModa, frecuencia: maxFrecuencia };
+}
+
+// Función "router": según la operación elegida, llama a la función correspondiente
+function calcularOperacion(operacion) {
+    const inputId = "inputAnios" + operacion.charAt(0).toUpperCase() + operacion.slice(1);
+    const textoAnios = document.getElementById(inputId).value.trim();
+
+    // Porcentaje y Tendencia usan un intervalo con guion (ej: 2017-2025)
+    // Media, Mediana y Moda usan años sueltos separados por coma (ej: 2020,2021,2022)
+    const esOperacionDeIntervalo = (operacion === 'porcentaje' || operacion === 'tendencia');
+
+    const datos = esOperacionDeIntervalo
+        ? obtenerDatosDeIntervalo(textoAnios)
+        : obtenerDatosDeAnios(textoAnios);
+
+    if (!datos) return;
+
+    const panel = document.getElementById("resultados" + operacion.charAt(0).toUpperCase() + operacion.slice(1));
+    panel.style.display = "block";
+
+    if (operacion === 'media') procesarOperacionMedia(datos);
+    if (operacion === 'mediana') procesarOperacionMediana(datos);
+    if (operacion === 'moda') procesarOperacionModa(datos);
+    if (operacion === 'porcentaje') procesarOperacionPorcentaje(datos);
+    if (operacion === 'tendencia') procesarOperacionTendencia(datos);
+}
+
+// Oculta el panel de resultados (tabla + gráfico) de una operación específica
+function ocultarOperacion(operacion) {
+    const panel = document.getElementById("resultados" + operacion.charAt(0).toUpperCase() + operacion.slice(1));
+    panel.style.display = "none";
+}
+
+// Permite escribir solo números y comas en las cajas de Media, Mediana y Moda.
+// Permite escribir solo números y un guion en las cajas de Porcentaje y Tendencia,
+// ya que estas dos únicamente aceptan un intervalo (ej: 2017-2025).
+function permitirSoloNumerosYComas() {
+    const idsConComa = ['inputAniosMedia', 'inputAniosMediana', 'inputAniosModa'];
+    const idsConIntervalo = ['inputAniosPorcentaje', 'inputAniosTendencia'];
+
+    idsConComa.forEach(id => {
+        const input = document.getElementById(id);
+        if (input) {
+            input.addEventListener('input', () => {
+                // Elimina cualquier caracter que no sea dígito (0-9) o coma
+                input.value = input.value.replace(/[^0-9,]/g, '');
+            });
+        }
+    });
+
+    idsConIntervalo.forEach(id => {
+        const input = document.getElementById(id);
+        if (input) {
+            input.addEventListener('input', () => {
+                // Elimina cualquier caracter que no sea dígito (0-9) o guion
+                input.value = input.value.replace(/[^0-9-]/g, '');
+            });
+        }
+    });
+}
+
+// --- MEDIA ---
+function procesarOperacionMedia(datos) {
+    const totales = datos.map(d => d.total);
+    const media = calcularMedia(totales);
+
+    document.getElementById('tablaMediaContenedor').innerHTML = `
+        <table class="tabla-estadistica">
+            <thead><tr><th>Años seleccionados</th><th>Media (promedio)</th></tr></thead>
+            <tbody>
+                <tr><td>${datos.map(d => d.anio).join(", ")}</td><td>${media}</td></tr>
+            </tbody>
+        </table>
+    `;
+
+    destruirGraficoSiExiste('chartMedia');
+    chartInstances['chartMedia'] = new Chart(document.getElementById('chartMedia').getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels: datos.map(d => d.anio),
+            datasets: [
+                { label: 'Total homicidios por año', data: totales, backgroundColor: '#2b5f9e' },
+                { label: 'Media', data: datos.map(() => media), type: 'line', borderColor: '#e9a95c', backgroundColor: 'transparent', borderWidth: 3, tension: 0 }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.03)' } },
+                y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+            },
+            plugins: { legend: { labels: { color: '#e2e8f0' } } }
+        }
+    });
+}
+
+// --- MEDIANA ---
+function procesarOperacionMediana(datos) {
+    const totales = datos.map(d => d.total);
+    const mediana = calcularMediana(totales);
+
+    document.getElementById('tablaMedianaContenedor').innerHTML = `
+        <table class="tabla-estadistica">
+            <thead><tr><th>Años seleccionados</th><th>Mediana</th></tr></thead>
+            <tbody>
+                <tr><td>${datos.map(d => d.anio).join(", ")}</td><td>${mediana}</td></tr>
+            </tbody>
+        </table>
+    `;
+
+    destruirGraficoSiExiste('chartMediana');
+    chartInstances['chartMediana'] = new Chart(document.getElementById('chartMediana').getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels: datos.map(d => d.anio),
+            datasets: [
+                { label: 'Total homicidios por año', data: totales, backgroundColor: '#c8873a' },
+                { label: 'Mediana', data: datos.map(() => mediana), type: 'line', borderColor: '#e9a95c', backgroundColor: 'transparent', borderWidth: 3, tension: 0 }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.03)' } },
+                y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+            },
+            plugins: { legend: { labels: { color: '#e2e8f0' } } }
+        }
+    });
+}
+
+// --- MODA ---
+function procesarOperacionModa(datos) {
+    const totales = datos.map(d => d.total);
+    const resultadoModa = calcularModaArreglo(totales);
+
+    const textoModa = resultadoModa.valores.length > 0
+        ? resultadoModa.valores.map(v => v.toLocaleString()).join(" y ")
+        : "No hay un valor que se repita (todos los totales son distintos)";
+
+    document.getElementById('tablaModaContenedor').innerHTML = `
+        <table class="tabla-estadistica">
+            <thead><tr><th>Años seleccionados</th><th>Moda</th><th>Frecuencia</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>${datos.map(d => d.anio).join(", ")}</td>
+                    <td>${textoModa}</td>
+                    <td>${resultadoModa.valores.length > 0 ? resultadoModa.frecuencia + " veces" : "-"}</td>
+                </tr>
+            </tbody>
+        </table>
+    `;
+
+    // Para el gráfico, coloreamos en distinto color las barras que coinciden con la moda
+    const coloresBarras = totales.map(t =>
+        resultadoModa.valores.includes(t) ? '#e9a95c' : '#2b5f9e'
+    );
+
+    destruirGraficoSiExiste('chartModa');
+    chartInstances['chartModa'] = new Chart(document.getElementById('chartModa').getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels: datos.map(d => d.anio),
+            datasets: [
+                { label: 'Total homicidios por año (resaltado = moda)', data: totales, backgroundColor: coloresBarras }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.03)' } },
+                y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+            },
+            plugins: { legend: { labels: { color: '#e2e8f0' } } }
+        }
+    });
+}
+
+// --- PORCENTAJE ---
+function procesarOperacionPorcentaje(datos) {
+    const totales = datos.map(d => d.total);
+    const sumaTotal = totales.reduce((a, b) => a + b, 0);
+    const porcentajes = totales.map(t => ((t / sumaTotal) * 100).toFixed(1));
+
+    let filas = "";
+    datos.forEach((d, i) => {
+        filas += `<tr><td>${d.anio}</td><td>${d.total.toLocaleString()}</td><td>${porcentajes[i]}%</td></tr>`;
+    });
+
+    document.getElementById('tablaPorcentajeContenedor').innerHTML = `
+        <table class="tabla-estadistica">
+            <thead><tr><th>Año</th><th>Total homicidios</th><th>Porcentaje del total seleccionado</th></tr></thead>
+            <tbody>${filas}</tbody>
+        </table>
+    `;
+
+    const coloresPie = ['#2b5f9e', '#c8873a', '#1a4070', '#e9a95c', '#64748b', '#3b82f6', '#0f2d52'];
+
+    destruirGraficoSiExiste('chartPorcentaje');
+    chartInstances['chartPorcentaje'] = new Chart(document.getElementById('chartPorcentaje').getContext('2d'), {
+        type: 'pie',
+        data: {
+            labels: datos.map(d => `${d.anio} (${d.total.toLocaleString()})`),
+            datasets: [{
+                data: porcentajes,
+                backgroundColor: datos.map((_, i) => coloresPie[i % coloresPie.length]),
+                borderColor: '#1e293b',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom', labels: { color: '#e2e8f0' } },
+                tooltip: { callbacks: { label: (ctx) => ` ${parseFloat(ctx.parsed).toFixed(1)}%` } },
+                datalabels: { display: false }
+            }
+        }
+    });
+}
+
+// --- TENDENCIA ---
+function procesarOperacionTendencia(datos) {
+    // Ordenamos los años de menor a mayor para que la tendencia tenga sentido
+    const datosOrdenados = [...datos].sort((a, b) => a.anio - b.anio);
+    const totales = datosOrdenados.map(d => d.total);
+
+    let textoTendencia = "Estable";
+    if (totales.length >= 2) {
+        const primero = totales[0];
+        const ultimo = totales[totales.length - 1];
+        if (ultimo > primero) textoTendencia = "Creciente (aumentó)";
+        else if (ultimo < primero) textoTendencia = "Decreciente (disminuyó)";
+    }
+
+    const cambioPorcentual = totales.length >= 2
+        ? (((totales[totales.length - 1] - totales[0]) / totales[0]) * 100).toFixed(1)
+        : "0.0";
+
+    document.getElementById('tablaTendenciaContenedor').innerHTML = `
+        <table class="tabla-estadistica">
+            <thead><tr><th>Años seleccionados (ordenados)</th><th>Tendencia</th><th>Cambio porcentual del primero al último</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>${datosOrdenados.map(d => d.anio).join(", ")}</td>
+                    <td>${textoTendencia}</td>
+                    <td>${cambioPorcentual}%</td>
+                </tr>
+            </tbody>
+        </table>
+    `;
+
+    destruirGraficoSiExiste('chartTendencia');
+    chartInstances['chartTendencia'] = new Chart(document.getElementById('chartTendencia').getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: datosOrdenados.map(d => d.anio),
+            datasets: [{
+                label: 'Total homicidios por año',
+                data: totales,
+                borderColor: '#e9a95c',
+                backgroundColor: 'rgba(233, 169, 92, 0.08)',
+                fill: true,
+                tension: 0.15,
+                borderWidth: 3,
+                pointRadius: 5,
+                pointBackgroundColor: '#c8873a'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.01)' } },
+                y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+            },
+            plugins: { legend: { labels: { color: '#e2e8f0' } } }
+        }
+    });
+}
+
 // Inicialización de la SPA al cargar el DOM
 document.addEventListener("DOMContentLoaded", () => {
     mostrarSeccion("inicio");
+    permitirSoloNumerosYComas();
 });

@@ -239,6 +239,14 @@ section.activa {
 
 .search-box button:hover { background: #2563eb; }
 
+.search-box button.btn-ocultar {
+    background: #475569;
+}
+
+.search-box button.btn-ocultar:hover {
+    background: #64748b;
+}
+
 /* Grid del Cuadro de Mandos (Dashboard) */
 .grid-dashboard {
     display: grid;

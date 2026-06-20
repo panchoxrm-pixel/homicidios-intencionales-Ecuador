@@ -36,7 +36,8 @@
             <label for="menu-toggle" onclick="mostrarSeccion('area')">1. Área geográfica de los delitos</label>
             <label for="menu-toggle" onclick="mostrarSeccion('sexo')">2. Sexo de las víctimas</label>
             <label for="menu-toggle" onclick="mostrarSeccion('edad')">3. Edad de las víctimas</label>
-            <label for="menu-toggle" onclick="mostrarSeccion('comparacionEntreAnios')">4. Comparación entre años</label>
+            <label for="menu-toggle" onclick="mostrarSeccion('operacion')">4. Comparación entre años</label>
+            <label for="menu-toggle" onclick="mostrarSeccion('comparacionEntreAnios')">5. Tablas globales</label>
         </nav>
     </aside>
 
@@ -175,8 +176,102 @@
         </div>
     </section>
 
-    <section id="comparacionEntreAnios" class="contenedor-tema">
+
+    <section id="operacion" class="contenedor-tema">
         <h2>Comparación entre años</h2>
+        <p>En esta sección puede escribir los años que desea comparar (separados por coma) y calcular media, mediana, moda, porcentaje o tendencia del total de homicidios intencionales de esos años. El resultado se muestra en una tabla y en un gráfico.</p>
+
+        <!-- MEDIA -->
+        <div class="search-container">
+            <h3>Media (promedio)</h3>
+            <p>Escriba los años a comparar, separados por coma:</p>
+            <div class="search-box">
+                <input type="text" id="inputAniosMedia" placeholder="Ej: 2020,2021,2022">
+                <button onclick="calcularOperacion('media')">Calcular</button>
+                <button class="btn-ocultar" onclick="ocultarOperacion('media')">Ocultar</button>
+            </div>
+        </div>
+
+        <div id="resultadosMedia" class="resultados-panel" style="display: none;">
+            <div class="card chart-card full-width">
+                <h4>Resultado: Media entre años</h4>
+                <div id="tablaMediaContenedor"></div>
+                <div class="chart-container-line">
+                    <canvas id="chartMedia"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- MEDIANA -->
+        <div class="search-container">
+            <h3>Mediana</h3>
+            <p>Escriba los años a comparar, separados por coma:</p>
+            <div class="search-box">
+                <input type="text" id="inputAniosMediana" placeholder="Ej: 2020,2021,2022">
+                <button onclick="calcularOperacion('mediana')">Calcular</button>
+                <button class="btn-ocultar" onclick="ocultarOperacion('mediana')">Ocultar</button>
+
+            </div>
+        </div>
+
+        <div id="resultadosMediana" class="resultados-panel" style="display: none;">
+            <div class="card chart-card full-width">
+                <h4>Resultado: Mediana entre años</h4>
+                <div id="tablaMedianaContenedor"></div>
+                <div class="chart-container-line">
+                    <canvas id="chartMediana"></canvas>
+                </div>
+            </div>
+        </div>
+
+        
+
+        
+
+        <!-- PORCENTAJE -->
+        <div class="search-container">
+            <h3>Porcentaje</h3>
+            <p>Escriba un intervalo de años con guion:</p>
+            <div class="search-box">
+                <input type="text" id="inputAniosPorcentaje" placeholder="Ej: 2020-2025">
+                <button onclick="calcularOperacion('porcentaje')">Calcular</button>
+                 <button class="btn-ocultar" onclick="ocultarOperacion('porcentaje')">Ocultar</button>
+            </div>
+        </div>
+
+        <div id="resultadosPorcentaje" class="resultados-panel" style="display: none;">
+            <div class="card chart-card full-width">
+                <h4>Resultado: Porcentaje que representa cada año del total</h4>
+                <div id="tablaPorcentajeContenedor"></div>
+                <div class="chart-container-pie">
+                    <canvas id="chartPorcentaje"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- TENDENCIA -->
+        <div class="search-container">
+            <h3>Tendencia</h3>
+            <p>Escriba un intervalo de años con guion:</p>
+            <div class="search-box">
+                <input type="text" id="inputAniosTendencia" placeholder="Ej: 2020-2025">
+                <button onclick="calcularOperacion('tendencia')">Calcular</button>
+                 <button class="btn-ocultar" onclick="ocultarOperacion('tendencia')">Ocultar</button>
+            </div>
+        </div>
+
+        <div id="resultadosTendencia" class="resultados-panel" style="display: none;">
+            <div class="card chart-card full-width">
+                <h4>Resultado: Tendencia entre años</h4>
+                <div id="tablaTendenciaContenedor"></div>
+                <div class="chart-container-line">
+                    <canvas id="chartTendencia"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="comparacionEntreAnios" class="contenedor-tema">
+        <h2>Tablas globales</h2>
 
         <div class="grid-dashboard">
             <div class="card full-width table-card">
