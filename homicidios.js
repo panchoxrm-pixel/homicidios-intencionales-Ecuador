@@ -697,8 +697,21 @@ function ocultarOperacion(operacion) {
 // Permite escribir solo números y un guion en las cajas de Porcentaje y Tendencia,
 // ya que estas dos únicamente aceptan un intervalo (ej: 2017-2025).
 function permitirSoloNumerosYComas() {
+    const idsSolo = ['inputAnioEdad', 'inputAnioArea', 'inputAnioSexo' ];
     const idsConComa = ['inputAniosMedia', 'inputAniosMediana', 'inputAniosModa'];
     const idsConIntervalo = ['inputAniosPorcentaje', 'inputAniosTendencia'];
+
+
+    idsSolo.forEach(id => {
+        const input = document.getElementById(id);
+        if (input) {
+            input.addEventListener('input', () => {
+                 //Elimina cualquier caracter que no sea dígito (0-9) o coma
+              input.value = input.value.replace(/[^0-9]/g, '');
+                
+           });
+        }
+    }); 
 
     idsConComa.forEach(id => {
         const input = document.getElementById(id);
