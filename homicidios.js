@@ -10,6 +10,7 @@ const dataMaster = {
         hombres: [126, 88, 110, 105, 88, 100, 74, 99, 78, 67, 94, 95],
         mujeres: [25, 13, 19, 15, 19, 15, 8, 15, 12, 15, 12, 18],
         rangosEdad: { "Niños": 30, "Adolescentes": 52, "Jóvenes": 519, "Adultos": 646, "Adultos mayores": 63 },
+        sinDatoEdad: 0,
         edadMedia: 34.01,
         edadMediana: 31,
         edadModa: ["20"],
@@ -23,6 +24,7 @@ const dataMaster = {
         hombres: [87, 73, 83, 74, 83, 82, 59, 63, 67, 75, 69, 62],
         mujeres: [11, 9, 23, 11, 12, 18, 16, 15, 15, 14, 13, 16],
         rangosEdad: { "Niños": 29, "Adolescentes": 37, "Jóvenes": 391, "Adultos": 529, "Adultos mayores": 64 },
+        sinDatoEdad: 0,
         edadMedia: 35.32,
         edadMediana: 32,
         edadModa: ["28"],
@@ -37,6 +39,7 @@ const dataMaster = {
         mujeres: [16, 19, 11, 11, 21, 18, 14, 12, 17, 10, 17, 11],
         sinDatos: [4],
         rangosEdad: { "Niños": 24, "Adolescentes": 35, "Jóvenes": 331, "Adultos": 505, "Adultos mayores": 58 },
+        sinDatoEdad: 6,
         edadMedia: 35.34,
         edadMediana: 32,
         edadModa: ["25"],
@@ -50,6 +53,7 @@ const dataMaster = {
         hombres: [69, 68, 77, 70, 75, 62, 58, 51, 59, 60, 56, 69],
         mujeres: [26, 22, 16, 16, 15, 18, 17, 17, 12, 9, 9, 19],
         rangosEdad: { "Niños": 17, "Adolescentes": 30, "Jóvenes": 339, "Adultos": 532, "Adultos mayores": 51 },
+        sinDatoEdad: 1,
         edadMedia: 35.91,
         edadMediana: 33,
         edadModa: ["22", "24"],
@@ -63,6 +67,7 @@ const dataMaster = {
         hombres: [62, 77, 73, 85, 82, 66, 64, 65, 76, 65, 74, 67],
         mujeres: [11, 9, 16, 14, 16, 10, 7, 11, 13, 11, 9, 13],
         rangosEdad: { "Niños": 16, "Adolescentes": 24, "Jóvenes": 373, "Adultos": 520, "Adultos mayores": 63 },
+        sinDatoEdad: 0,
         edadMedia: 35.92,
         edadMediana: 33,
         edadModa: ["24", "26"],
@@ -77,6 +82,7 @@ const dataMaster = {
         mujeres: [9, 9, 14, 14, 11, 14, 12, 5, 14, 15, 18, 16],
         sinDatos: [2],
         rangosEdad: { "Niños": 19, "Adolescentes": 32, "Jóvenes": 416, "Adultos": 653, "Adultos mayores": 64 },
+        sinDatoEdad: 5,
         edadMedia: 35.39,
         edadMediana: 33,
         edadModa: ["25"],
@@ -91,6 +97,7 @@ const dataMaster = {
         mujeres: [12, 12, 9, 14, 14, 19, 10, 13, 12, 10, 23, 17],
         sinDatos: [1],
         rangosEdad: { "Niños": 29, "Adolescentes": 35, "Jóvenes": 431, "Adultos": 813, "Adultos mayores": 56 },
+        sinDatoEdad: 8,
         edadMedia: 35.42,
         edadMediana: 34,
         edadModa: ["35"],
@@ -104,6 +111,7 @@ const dataMaster = {
         hombres: [113, 213, 147, 151, 150, 155, 180, 187, 300, 203, 262, 208],
         mujeres: [9, 13, 26, 25, 22, 15, 18, 16, 25, 22, 20, 15],
         rangosEdad: { "Niños": 23, "Adolescentes": 57, "Jóvenes": 935, "Adultos": 1384, "Adultos mayores": 56 },
+        sinDatoEdad: 40,
         edadMedia: 33.53,
         edadMediana: 32,
         edadModa: ["30"],
@@ -118,6 +126,7 @@ const dataMaster = {
         mujeres: [22, 27, 33, 36, 33, 35, 40, 35, 40, 41, 30, 52],
         sinDatos: [23],
         rangosEdad: { "Niños": 46, "Adolescentes": 158, "Jóvenes": 2070, "Adultos": 2439, "Adultos mayores": 90 },
+        sinDatoEdad: 83,
         edadMedia: 32.38,
         edadMediana: 30,
         edadModa: ["30"],
@@ -132,6 +141,7 @@ const dataMaster = {
         mujeres: [33, 47, 61, 42, 43, 40, 69, 49, 60, 61, 48, 50],
         sinDatos: [39],
         rangosEdad: { "Niños": 62, "Adolescentes": 315, "Jóvenes": 3483, "Adultos": 4006, "Adultos mayores": 113 },
+        sinDatoEdad: 269,
         edadMedia: 31.89,
         edadMediana: 30,
         edadModa: ["30"],
@@ -146,6 +156,7 @@ const dataMaster = {
         mujeres: [44, 34, 43, 32, 40, 46, 35, 44, 47, 56, 47, 53],
         sinDatos: [35],
         rangosEdad: { "Niños": 42, "Adolescentes": 373, "Jóvenes": 2879, "Adultos": 3467, "Adultos mayores": 128 },
+        sinDatoEdad: 174,
         edadMedia: 32.32,
         edadMediana: 30,
         edadModa: ["30"],
@@ -160,6 +171,7 @@ const dataMaster = {
         mujeres: [71, 63, 62, 49, 98, 51, 45, 74, 67, 72, 70, 66],
         sinDatos: [58],
         rangosEdad: { "Niños": 46, "Adolescentes": 539, "Jóvenes": 3824, "Adultos": 4433, "Adultos mayores": 144 },
+        sinDatoEdad: 295,
         edadMedia: 30.00,
         edadMediana: 30,
         edadModa: ["25"],
@@ -171,9 +183,10 @@ const dataMaster = {
         urbano: [574, 528, 498, 523],
         rural: [185, 154, 166, 150],
         hombres: [703, 630, 595, 603],
-        mujeres: [32, 28, 30, 32],
+        mujeres: [55, 51, 64, 67],
         sinDatos: [10],
         rangosEdad: { "Niños": 11, "Adolescentes": 194, "Jóvenes": 1188, "Adultos": 1269, "Adultos mayores": 38 },
+        sinDatoEdad: 78,
         edadMedia: 29.00,
         edadMediana: 29,
         edadModa: ["25"],
@@ -452,15 +465,19 @@ function procesarEdad(d) {
     const etiquetas = Object.keys(d.rangosEdad);
     const valores = Object.values(d.rangosEdad);
 
-    const totalEdad = valores.reduce((a, b) => a + b, 0);
-    const etiquetasConCantidad = etiquetas.map((e, i) => `${e} (${valores[i].toLocaleString()})`);
+    const sinDatoEdad = d.sinDatoEdad || 0;
+    const etiquetasCompletas = sinDatoEdad > 0 ? [...etiquetas, "Sin dato"] : etiquetas;
+    const valoresCompletos   = sinDatoEdad > 0 ? [...valores, sinDatoEdad]  : valores;
+
+    const totalEdad = valoresCompletos.reduce((a, b) => a + b, 0);
+    const etiquetasConCantidad = etiquetasCompletas.map((e, i) => `${e} (${valoresCompletos[i].toLocaleString()})`);
 
     destruirGraficoSiExiste('chartEdadPie');
     chartInstances['chartEdadPie'] = new Chart(document.getElementById('chartEdadPie').getContext('2d'), {
         type: 'pie',
         data: {
             labels: etiquetasConCantidad,
-            datasets: [{ data: valores, backgroundColor: ['#2b5f9e', '#c8873a', '#1a4070', '#e9a95c', '#64748b'], borderColor: '#1e293b', borderWidth: 2 }]
+            datasets: [{ data: valoresCompletos, backgroundColor: ['#2b5f9e', '#c8873a', '#1a4070', '#e9a95c', '#64748b', '#475569'], borderColor: '#1e293b', borderWidth: 2 }]
         },
         options: {
             responsive: true,
