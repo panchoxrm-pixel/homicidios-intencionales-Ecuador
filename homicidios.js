@@ -769,6 +769,9 @@ function permitirSoloNumerosYComas() {
 
 // --- MEDIA ---
 function procesarOperacionMedia(datos) {
+
+    datos.sort((a, b) => a.anio - b.anio);
+
     const totales = datos.map(d => d.total);
     const media = calcularMedia(totales);
 
@@ -787,7 +790,7 @@ function procesarOperacionMedia(datos) {
         data: {
             labels: datos.map(d => d.anio),
             datasets: [
-                { label: 'Total homicidios por año', data: totales, backgroundColor: '#2b5f9e' },
+                { label: 'Total homicidios por año', data: totales, backgroundColor: datos.map((_, i) => ['#2b5f9e','#c8873a','#1a4070','#e9a95c','#64748b','#3b82f6','#0f2d52'][i % 7]) },
                 { label: 'Media', data: datos.map(() => media), type: 'line', borderColor: '#e9a95c', backgroundColor: 'transparent', borderWidth: 3, tension: 0 }
             ]
         },
@@ -805,6 +808,9 @@ function procesarOperacionMedia(datos) {
 
 // --- MEDIANA ---
 function procesarOperacionMediana(datos) {
+
+    datos.sort((a, b) => a.anio - b.anio);
+
     const totales = datos.map(d => d.total);
     const mediana = calcularMediana(totales);
 
@@ -823,7 +829,7 @@ function procesarOperacionMediana(datos) {
         data: {
             labels: datos.map(d => d.anio),
             datasets: [
-                { label: 'Total homicidios por año', data: totales, backgroundColor: '#c8873a' },
+                { label: 'Total homicidios por año', data: totales, backgroundColor: datos.map((_, i) => ['#2b5f9e','#c8873a','#1a4070','#e9a95c','#64748b','#3b82f6','#0f2d52'][i % 7]) },
                 { label: 'Mediana', data: datos.map(() => mediana), type: 'line', borderColor: '#e9a95c', backgroundColor: 'transparent', borderWidth: 3, tension: 0 }
             ]
         },
