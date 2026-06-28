@@ -482,7 +482,7 @@ function procesarEdad(d) {
     const valores = Object.values(d.rangosEdad);
 
     const sinDatoEdad = d.sinDatoEdad || 0;
-    const etiquetasCompletas = sinDatoEdad > 0 ? [...etiquetas, "Sin dato"] : etiquetas;
+    const etiquetasCompletas = sinDatoEdad > 0 ? [...etiquetas, "Sin datos"] : etiquetas;
     const valoresCompletos   = sinDatoEdad > 0 ? [...valores, sinDatoEdad]  : valores;
 
     const totalEdad = valoresCompletos.reduce((a, b) => a + b, 0);
