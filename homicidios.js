@@ -275,7 +275,7 @@ function mostrarSeccion(id){
 // ============================================================================
 function calcularMedia(arr) {
     const sum = arr.reduce((a, b) => a + b, 0);
-    return (sum / arr.length).toFixed(2);
+    return (sum / arr.length).toFixed(0);
 }
 
 function calcularMediana(arr) {
@@ -284,7 +284,7 @@ function calcularMediana(arr) {
     if (sorted.length % 2 !== 0) {
         return sorted[mid];
     }
-    return ((sorted[mid - 1] + sorted[mid]) / 2).toFixed(2);
+    return ((sorted[mid - 1] + sorted[mid]) / 2).toFixed(0);
 }
 
 // ============================================================================
@@ -777,9 +777,9 @@ function procesarOperacionMedia(datos) {
 
     document.getElementById('tablaMediaContenedor').innerHTML = `
         <table class="tabla-estadistica">
-            <thead><tr><th>Años seleccionados</th><th>Media (promedio)</th></tr></thead>
+            <thead><tr><th>Años seleccionados</th><th>Media</th></tr></thead>
             <tbody>
-                <tr><td>${datos.map(d => d.anio).join(", ")}</td><td>${media}</td></tr>
+                <tr><td>${datos.map(d => d.anio).join(", ")}</td><td>${media} homicidios intencionales</td></tr>
             </tbody>
         </table>
     `;
@@ -788,11 +788,35 @@ function procesarOperacionMedia(datos) {
     chartInstances['chartMedia'] = new Chart(document.getElementById('chartMedia').getContext('2d'), {
         type: 'bar',
         data: {
-            labels: datos.map(d => d.anio),
-            datasets: [
-                { label: 'Total homicidios por año', data: totales, backgroundColor: datos.map((_, i) => ['#2b5f9e','#c8873a','#1a4070','#e9a95c','#64748b','#3b82f6','#0f2d52'][i % 7]) },
-                { label: 'Media', data: datos.map(() => media), type: 'line', borderColor: '#e9a95c', backgroundColor: 'transparent', borderWidth: 3, tension: 0 }
-            ]
+    labels: datos.map(d => d.anio),
+    datasets: [
+        {
+            label: 'Total de homicidios intencionales',
+            data: totales,
+                backgroundColor: '#2b5f9e',
+                order: 1,
+                pointStyle: 'rect',
+                datalabels: {
+                    anchor: 'end',
+                    align: 'top',
+                    color: '#ffffff',
+                    font: { size: 11, weight: '600' },
+                    formatter: v => v.toLocaleString()
+                }
+        },
+        {
+            label: 'Media',
+            data: datos.map(() => parseFloat(media)),
+            type: 'line',
+            borderColor: '#10b981',
+            backgroundColor: 'transparent',
+            borderWidth: 2,
+            tension: 0,
+            pointRadius: 0,
+            pointStyle: 'line',
+            datalabels: { display: false }
+            }
+        ]
         },
         options: {
             responsive: true,
@@ -801,9 +825,10 @@ function procesarOperacionMedia(datos) {
                 x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.03)' } },
                 y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } }
             },
-            plugins: { legend: { labels: { color: '#e2e8f0' } } }
-        }
-    });
+            plugins: {
+                legend: { labels: { color: '#e2e8f0', usePointStyle: true, padding: 25 }, maxHeight: 60 } 
+            }
+        }});
 }
 
 // --- MEDIANA ---
@@ -816,10 +841,10 @@ function procesarOperacionMediana(datos) {
 
     document.getElementById('tablaMedianaContenedor').innerHTML = `
         <table class="tabla-estadistica">
-            <thead><tr><th>Años seleccionados</th><th>Mediana</th></tr></thead>
-            <tbody>
-                <tr><td>${datos.map(d => d.anio).join(", ")}</td><td>${mediana}</td></tr>
-            </tbody>
+        <thead><tr><th>Años seleccionados</th><th>Mediana</th></tr></thead>
+        <tbody>
+        <tr><td>${datos.map(d => d.anio).join(", ")}</td><td>${mediana} homicidios intencionales</td></tr>
+        </tbody>
         </table>
     `;
 
@@ -829,9 +854,30 @@ function procesarOperacionMediana(datos) {
         data: {
             labels: datos.map(d => d.anio),
             datasets: [
-                { label: 'Total homicidios por año', data: totales, backgroundColor: datos.map((_, i) => ['#2b5f9e','#c8873a','#1a4070','#e9a95c','#64748b','#3b82f6','#0f2d52'][i % 7]) },
-                { label: 'Mediana', data: datos.map(() => mediana), type: 'line', borderColor: '#e9a95c', backgroundColor: 'transparent', borderWidth: 3, tension: 0 }
-            ]
+            { label: 'Total de homicidios intencionales', data: totales,
+                backgroundColor: '#2b5f9e',
+                order: 1,
+                pointStyle: 'rect',
+                datalabels: { 
+                    anchor: 'end',
+                    align: 'top',
+                    color: '#ffffff',
+                    font: { size: 11, weight: '600' },
+                    formatter: v => v.toLocaleString() 
+                }
+            },
+            { 
+                label: 'Mediana',
+                data: datos.map(() => mediana),
+                type: 'line',
+                borderColor: '#10b981',
+                backgroundColor: 'transparent',
+                borderWidth: 2,
+                tension: 0,
+                pointRadius: 0,
+                pointStyle: 'line',
+                datalabels: { display: false } 
+            }            ]
         },
         options: {
             responsive: true,
@@ -840,7 +886,9 @@ function procesarOperacionMediana(datos) {
                 x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.03)' } },
                 y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } }
             },
-            plugins: { legend: { labels: { color: '#e2e8f0' } } }
+            plugins: {
+                legend: { labels: { color: '#e2e8f0', usePointStyle: true, padding: 25 }, maxHeight: 60 } 
+            }
         }
     });
 }
