@@ -303,8 +303,8 @@ function consultarPorAnio(seccion) {
     const panel = document.getElementById(`resultados${seccion.charAt(0).toUpperCase() + seccion.slice(1)}`);
     panel.style.display = "block";
 
-    if (seccion === 'area') document.querySelector('#chartAreaLine').closest('.card').querySelector('h4').textContent = `Tendencia del año ${anioInput}`;
-    if (seccion === 'sexo') document.querySelector('#chartSexoLine').closest('.card').querySelector('h4').textContent = `Tendencia del año ${anioInput}`;
+    if (seccion === 'area') document.querySelector('#chartAreaLine').closest('.card').querySelector('h4').textContent = `Tendencia de homicidios intencionales del año ${anioInput}`;
+    if (seccion === 'sexo') document.querySelector('#chartSexoLine').closest('.card').querySelector('h4').textContent = `Tendencia de homicidios intencionales del año ${anioInput}`;
     
 const registroAnual = dataHistorica.find(item => item.anio == anioInput);
     const totalHomicidios = registroAnual ? registroAnual.total.toLocaleString() : "0";
@@ -374,7 +374,15 @@ function procesarArea(d) {
                 x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.03)' } },
                 y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } }
             },
-            plugins: { legend: { labels: { color: '#e2e8f0' } } }
+            plugins: { legend: { labels: { color: '#e2e8f0' } }, 
+            datalabels: {
+                align: 'top',
+                anchor: 'end',
+                color: '#e2e8f0',
+                font: { size: 11, weight: '600' },
+                formatter: v => v
+            }
+            }
         }
     });
 }
@@ -455,7 +463,15 @@ datasets: [{
                 x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.03)' } },
                 y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } }
             },
-            plugins: { legend: { labels: { color: '#e2e8f0' } } }
+            plugins: { legend: { labels: { color: '#e2e8f0' } }, 
+                datalabels: {
+            align: 'top',
+            anchor: 'end',
+            color: '#e2e8f0',
+            font: { size: 11, weight: '600' },
+            formatter: v => v
+            }
+            }
         }
     });
 }
