@@ -576,7 +576,16 @@ function renderizarPestañaComparativa() {
                 x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.01)' } },
                 y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } }
             },
-            plugins: { legend: { labels: { color: '#e2e8f0' } } }
+            plugins: {
+            legend: { labels: { color: '#e2e8f0' } },
+            datalabels: {
+                align: 'top',
+                anchor: 'end',
+                color: '#e2e8f0',
+                font: { size: 11, weight: '600' },
+                formatter: v => v
+            }
+            }
         }
     });
 }
@@ -1030,7 +1039,8 @@ function procesarOperacionTendencia(datos) {
                 tension: 0.15,
                 borderWidth: 3,
                 pointRadius: 5,
-                pointBackgroundColor: '#c8873a'
+                pointBackgroundColor: '#c8873a',
+                pointStyle: 'line'
             }]
         },
         options: {
@@ -1040,7 +1050,16 @@ function procesarOperacionTendencia(datos) {
                 x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.01)' } },
                 y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } }
             },
-            plugins: { legend: { labels: { color: '#e2e8f0' } } }
+            plugins: {
+                legend: { labels: { color: '#e2e8f0', usePointStyle: true, padding: 25 }, maxHeight: 60 },
+                datalabels: {
+                    align: 'top',
+                    anchor: 'end',
+                    color: '#e2e8f0',
+                    font: { size: 11, weight: '600' },
+                    formatter: v => v.toLocaleString()
+                }
+            }
         }
     });
 }

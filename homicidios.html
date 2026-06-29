@@ -183,8 +183,8 @@
 
         <!-- MEDIA -->
         <div class="search-container">
-            <h3>Media (promedio)</h3>
-            <p>Escriba los años que desea comparar, separados por coma:</p>
+            <h3>Media</h3>
+            <p>Escriba los años que desea promediar, separados por coma:</p>
             <div class="search-box">
                 <input type="text" id="inputAniosMedia" placeholder="Ej: 2020,2021,2022">
                 <button onclick="calcularOperacion('media')">Calcular</button>
@@ -205,7 +205,7 @@
         <!-- MEDIANA -->
         <div class="search-container">
             <h3>Mediana</h3>
-            <p>Escriba los años que desea comparar, separados por coma:</p>
+            <p>Escriba los años que desea comparar, separados por coma. Se identificará el valor central al ordenarlos de menor a mayor.</p>
             <div class="search-box">
                 <input type="text" id="inputAniosMediana" placeholder="Ej: 2020,2021,2022">
                 <button onclick="calcularOperacion('mediana')">Calcular</button>
@@ -222,16 +222,12 @@
                     <canvas id="chartMediana"></canvas>
                 </div>
             </div>
-        </div>
-
-        
-
-        
+        </div>          
 
         <!-- PORCENTAJE -->
         <div class="search-container">
-            <h3>Porcentaje</h3>
-            <p>Escriba el intervalo de años que desea comparar, separando el año inicial y el final con un guion:</p>
+            <h3>Porcentajes</h3>
+            <p>Escriba el año inicial y el año final separados por guion. Se calculará qué porcentaje representa cada año del total acumulado en ese periodo.</p>
             <div class="search-box">
                 <input type="text" id="inputAniosPorcentaje" placeholder="Ej: 2020-2025">
                 <button onclick="calcularOperacion('porcentaje')">Calcular</button>
@@ -252,7 +248,7 @@
         <!-- TENDENCIA -->
         <div class="search-container">
             <h3>Tendencia</h3>
-            <p>Escriba el intervalo de años que desea comparar, separando el año inicial y el final con un guion:</p>
+            <p>Escriba el año inicial y el año final separados por guion. Se mostrará si los homicidios intencionales aumentaron, disminuyeron o se mantuvieron estables en ese período.</p>
             <div class="search-box">
                 <input type="text" id="inputAniosTendencia" placeholder="Ej: 2020-2025">
                 <button onclick="calcularOperacion('tendencia')">Calcular</button>
